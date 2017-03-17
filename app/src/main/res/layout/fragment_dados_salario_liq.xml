@@ -28,7 +28,7 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
+        <com.blackcat.currencyedittext.CurrencyEditText
             android:id="@+id/et_salario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,8 @@
             android:maxLength="15"
             android:textAlignment="textEnd"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:allow_negative_values="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -109,7 +110,7 @@
                 android:textSize="18sp"
                 app:srcCompat="@drawable/ic_add" />
 
-            <EditText
+            <com.blackcat.currencyedittext.CurrencyEditText
                 android:id="@+id/et_descontos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

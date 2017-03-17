@@ -2,9 +2,10 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.blackcat.currencyedittext.CurrencyEditText;
 
 /**
  * Created by victo on 14/03/2017.
@@ -19,7 +20,7 @@ public interface IFragment {
     interface IFragmentPresenter {
         Context getContext();
         void setView(Context context);
-        void onAddDescontoClick(final EditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto);
+        void onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto);
 
     }
     interface IFragmentView {

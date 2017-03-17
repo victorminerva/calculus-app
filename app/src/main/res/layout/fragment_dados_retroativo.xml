@@ -27,7 +27,7 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <EditText
+        <com.blackcat.currencyedittext.CurrencyEditText
             android:id="@+id/et_salario_anterior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

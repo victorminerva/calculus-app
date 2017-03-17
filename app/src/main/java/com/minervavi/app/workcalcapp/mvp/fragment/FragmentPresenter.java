@@ -3,11 +3,11 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.R;
 
 import java.util.ArrayList;
@@ -38,11 +38,11 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     }
 
     @Override
-    public void onAddDescontoClick(final EditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto) {
+    public void onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto) {
         if ("".equals(etDesconto.getText().toString())) {
             etDesconto.setError("Preencha este campo!");
         } else {
-            listOfDescontos.add(etDesconto.getText().toString().replaceAll("[R$,.]", ""));
+            listOfDescontos.add(String.valueOf(etDesconto.getRawValue()));
 
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final View rowDesconto = layoutInflater.inflate(R.layout.row_desconto, null);

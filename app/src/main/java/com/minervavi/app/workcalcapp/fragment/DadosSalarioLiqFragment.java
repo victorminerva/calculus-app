@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
 import com.minervavi.app.workcalcapp.mvp.fragment.IFragment;
@@ -18,11 +19,11 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
 
     IFragment.IFragmentPresenter fragmentPresenter;
 
-    private EditText        etSalario;
-    private EditText        etNumDep;
-    private ImageButton     btnAdd;
-    private EditText        etDescontos;
-    private LinearLayout    llDescontos;
+    private CurrencyEditText    etSalario;
+    private EditText            etNumDep;
+    private CurrencyEditText    etDescontos;
+    private ImageButton         btnAdd;
+    private LinearLayout        llDescontos;
 
     public DadosSalarioLiqFragment() {
         // Required empty public constructor
@@ -48,6 +49,7 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dados_salario_liq, container, false);
         init(view);
+
         return view;
     }
 
@@ -66,9 +68,9 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
     @Override
     public void init(View view) {
         this.llDescontos    = (LinearLayout) view.findViewById(R.id.ll_descontos);
-        this.etDescontos    = (EditText) view.findViewById(R.id.et_descontos);
+        this.etDescontos    = (CurrencyEditText) view.findViewById(R.id.et_descontos);
         this.btnAdd         = (ImageButton) view.findViewById(R.id.btn_add);
         this.etNumDep       = (EditText) view.findViewById(R.id.et_num_dep);
-        this.etSalario      = (EditText) view.findViewById(R.id.et_salario);
+        this.etSalario      = (CurrencyEditText ) view.findViewById(R.id.et_salario);
     }
 }
