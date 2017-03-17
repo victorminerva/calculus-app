@@ -1,0 +1,108 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey800"
+    android:orientation="vertical"
+    tools:context="com.minervavi.app.workcalcapp.fragment.DadosHoraExtraFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_double"
+        android:paddingRight="@dimen/spacing_double"
+        android:paddingTop="@dimen/spacing_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/tv_jornada_mensal"
+            android:textAlignment="textEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.vicmikhailau.maskededittext.MaskedEditText
+            android:id="@+id/et_jornada_mensal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:inputType="number|numberDecimal"
+            android:maxLength="15"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_double"
+        android:paddingRight="@dimen/spacing_double"
+        android:paddingTop="@dimen/spacing_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/tv_adicional_hora_extra"
+            android:textAlignment="textEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.vicmikhailau.maskededittext.MaskedEditText
+            android:id="@+id/et_adicional_he"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:inputType="numberDecimal"
+            android:maxLength="4"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:mask="###?%" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_double"
+        android:paddingRight="@dimen/spacing_double"
+        android:paddingTop="@dimen/spacing_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/tv_num_hora_extra"
+            android:textAlignment="textEnd"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.vicmikhailau.maskededittext.MaskedEditText
+            android:id="@+id/et_num_hora_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:inputType="time"
+            android:maxLength="15"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:mask="##:##" />
+    </LinearLayout>
+
+</LinearLayout>
