@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     private FrameLayout flGeneralHoraExtra;
     private FrameLayout flGeneralDecimo;
     private FrameLayout flGeneralRetroativo;
-    private FrameLayout flContainer;
 
     private RelativeLayout slideView;
     private FrameLayout dim;
@@ -47,12 +46,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         appPresenter.setFragmentManager(getSupportFragmentManager());
 
         init();
-
-        flGeneralSalario.setOnClickListener(this);
-        flGeneralFerias.setOnClickListener(this);
-        flGeneralHoraExtra.setOnClickListener(this);
-        flGeneralDecimo.setOnClickListener(this);
-        flGeneralRetroativo.setOnClickListener(this);
 
         slideUp = new SlideUp.Builder(slideView)
                 .withListeners(new SlideUp.Listener() {
@@ -89,9 +82,14 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         this.flGeneralHoraExtra = (FrameLayout) findViewById(R.id.fl_general_hora_extra);
         this.flGeneralDecimo = (FrameLayout) findViewById(R.id.fl_general_decimo);
         this.flGeneralRetroativo = (FrameLayout) findViewById(R.id.fl_general_retroativo);
-        this.flContainer = (FrameLayout) findViewById(R.id.fl_container);
         this.slideView = (RelativeLayout) findViewById(R.id.slideView);
         this.dim = (FrameLayout) findViewById(R.id.dim);
+
+        flGeneralSalario.setOnClickListener(this);
+        flGeneralFerias.setOnClickListener(this);
+        flGeneralHoraExtra.setOnClickListener(this);
+        flGeneralDecimo.setOnClickListener(this);
+        flGeneralRetroativo.setOnClickListener(this);
 
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(this, R.color.grey800));
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,
