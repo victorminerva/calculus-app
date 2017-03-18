@@ -14,6 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_calculate" />
 
+    <FrameLayout
+        android:id="@+id/dim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true" />
+
+    <include layout="@layout/content_slide_up_view" />
 </android.support.design.widget.CoordinatorLayout>
