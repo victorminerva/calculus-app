@@ -104,4 +104,11 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/fab" />
+    </android.support.design.widget.CoordinatorLayout>
+
 </LinearLayout>

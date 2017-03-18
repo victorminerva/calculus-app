@@ -1,12 +1,14 @@
 package com.minervavi.app.workcalcapp.mvp.app;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.mancj.slideup.SlideUp;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.fragment.DadosDecimoFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosFeriasFragment;
@@ -85,6 +87,21 @@ public class AppPresenter implements IApp.IAppPresenter {
     @Override
     public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
+    }
+
+    @Override
+    public void showSlideUpCurrent(SlideUp slideUp, final FloatingActionButton fab) {
+        slideUp.show();
+        slideUp.addSlideListener(new SlideUp.Listener() {
+            @Override
+            public void onSlide(float percent) {
+                fab.hide();
+            }
+            @Override
+            public void onVisibilityChanged(int visibility) {
+                fab.show();
+            }
+        });
     }
 
 }

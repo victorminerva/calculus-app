@@ -14,15 +14,16 @@ import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.fragment.DadosSalarioLiqFragment;
 import com.minervavi.app.workcalcapp.mvp.app.AppPresenter;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
+import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
 
 public class MainActivity extends AppCompatActivity implements IApp.IAppView, FrameLayout.OnClickListener {
 
     private AppPresenter appPresenter;
+    private FragmentPresenter fragmentPresenter;
 
     /**
      * Screen's Components
      */
-    private FloatingActionButton fab;
     private FrameLayout flGeneralSalario;
     private FrameLayout flGeneralFerias;
     private FrameLayout flGeneralHoraExtra;
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         appPresenter = new AppPresenter();
         appPresenter.setView(this);
         appPresenter.setFragmentManager(getSupportFragmentManager());
-
+        fragmentPresenter = new FragmentPresenter();
+        fragmentPresenter.setViewApp(this);
         init();
 
         slideUp = new SlideUp.Builder(slideView)
@@ -55,9 +57,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                     }
 
                     @Override
-                    public void onVisibilityChanged(int visibility) {
-                        fab.show();
-                    }
+                    public void onVisibilityChanged(int visibility) {}
                 })
                 .withStartGravity(Gravity.BOTTOM)
                 .withLoggingEnabled(true)
@@ -65,25 +65,17 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                 .withStartState(SlideUp.State.HIDDEN)
                 .build();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                slideUp.show();
-                fab.hide();
-            }
-        });
     }
 
     @Override
     public void init() {
-        this.fab = (FloatingActionButton) findViewById(R.id.fab);
-        this.flGeneralSalario = (FrameLayout) findViewById(R.id.fl_general_salario);
-        this.flGeneralFerias = (FrameLayout) findViewById(R.id.fl_general_ferias);
-        this.flGeneralHoraExtra = (FrameLayout) findViewById(R.id.fl_general_hora_extra);
-        this.flGeneralDecimo = (FrameLayout) findViewById(R.id.fl_general_decimo);
-        this.flGeneralRetroativo = (FrameLayout) findViewById(R.id.fl_general_retroativo);
-        this.slideView = (RelativeLayout) findViewById(R.id.slideView);
-        this.dim = (FrameLayout) findViewById(R.id.dim);
+        this.flGeneralSalario       = (FrameLayout) findViewById(R.id.fl_general_salario);
+        this.flGeneralFerias        = (FrameLayout) findViewById(R.id.fl_general_ferias);
+        this.flGeneralHoraExtra     = (FrameLayout) findViewById(R.id.fl_general_hora_extra);
+        this.flGeneralDecimo        = (FrameLayout) findViewById(R.id.fl_general_decimo);
+        this.flGeneralRetroativo    = (FrameLayout) findViewById(R.id.fl_general_retroativo);
+        this.slideView              = (RelativeLayout) findViewById(R.id.slideView);
+        this.dim                    = (FrameLayout) findViewById(R.id.dim);
 
         flGeneralSalario.setOnClickListener(this);
         flGeneralFerias.setOnClickListener(this);
@@ -94,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(this, R.color.grey800));
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,
                 DadosSalarioLiqFragment.newInstance()).commit();
+    }
+
+    @Override
+    public void showSlideUpCurrent(final FloatingActionButton fab) {
+        appPresenter.showSlideUpCurrent(slideUp, fab);
     }
 
     @Override

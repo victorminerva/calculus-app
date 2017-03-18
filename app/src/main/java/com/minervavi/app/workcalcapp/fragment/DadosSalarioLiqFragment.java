@@ -2,6 +2,7 @@ package com.minervavi.app.workcalcapp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,14 @@ import com.minervavi.app.workcalcapp.mvp.fragment.IFragment;
 
 public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFragmentView{
 
-    IFragment.IFragmentPresenter fragmentPresenter;
+    private IFragment.IFragmentPresenter fragmentPresenter;
 
-    private CurrencyEditText    etSalario;
-    private EditText            etNumDep;
-    private CurrencyEditText    etDescontos;
-    private ImageButton         btnAdd;
-    private LinearLayout        llDescontos;
+    private CurrencyEditText        etSalario;
+    private EditText                etNumDep;
+    private CurrencyEditText        etDescontos;
+    private ImageButton             btnAdd;
+    private LinearLayout            llDescontos;
+    private FloatingActionButton    fab;
 
     public DadosSalarioLiqFragment() {
         // Required empty public constructor
@@ -41,6 +43,7 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
         super.onCreate(savedInstanceState);
         fragmentPresenter = new FragmentPresenter();
         fragmentPresenter.setView(this.getContext());
+        fragmentPresenter.setActivity(getActivity());
     }
 
     @Override
@@ -63,6 +66,16 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
                 fragmentPresenter.onAddDescontoClick(etDescontos, btnAdd, llDescontos);
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentPresenter.showSlideUpFragCurrent(fab);
+                /*FragmentManager fragManager         = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragManager.beginTransaction();;
+                fragmentTransaction.replace(R.id.container_slideup, DadosSalarioLiqFragment.newInstance()).commit();*/
+            }
+        });
     }
 
     @Override
@@ -72,5 +85,7 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
         this.btnAdd         = (ImageButton) view.findViewById(R.id.btn_add);
         this.etNumDep       = (EditText) view.findViewById(R.id.et_num_dep);
         this.etSalario      = (CurrencyEditText ) view.findViewById(R.id.et_salario);
+        this.fab            = (FloatingActionButton) view.findViewById(R.id.fab);
     }
+
 }

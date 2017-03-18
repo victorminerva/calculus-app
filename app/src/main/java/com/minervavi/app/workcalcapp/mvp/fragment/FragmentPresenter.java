@@ -1,6 +1,8 @@
 package com.minervavi.app.workcalcapp.mvp.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.mvp.app.IApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +22,12 @@ import java.util.List;
 
 public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
-    Context context;
+    private IApp.IAppView appView;
+    private IFragment.IFragmentView fragmentView;
 
+    /** Context */
+    private Context context;
+    /** Lists */
     private List<String> listOfDescontos;
 
     public FragmentPresenter(){
@@ -35,6 +42,16 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     @Override
     public void setView(Context context) {
         this.context = context;
+    }
+
+    @Override
+    public void setViewApp(IApp.IAppView appView) {
+        this.appView = appView;
+    }
+
+    @Override
+    public void setActivity(Activity activity) {
+        this.appView = (IApp.IAppView) activity;
     }
 
     @Override
@@ -56,9 +73,9 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
                 @Override
                 public void onClick(View v) {
                     ((LinearLayout) rowDesconto.getParent()).removeView(rowDesconto);
-                    String valorDesconto = tvDesconto.getText().toString().replaceAll("[R$,.]", "");
-                    if(listOfDescontos.contains(valorDesconto))
-                        listOfDescontos.remove(valorDesconto);
+
+                    if(listOfDescontos.contains(String.valueOf(etDesconto.getRawValue())))
+                        listOfDescontos.remove(String.valueOf(etDesconto.getRawValue()));
 
                     btnAdd.setVisibility(View.VISIBLE);
                     etDesconto.setVisibility(View.VISIBLE);
@@ -74,5 +91,10 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
                 etDesconto.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public void showSlideUpFragCurrent(FloatingActionButton fab) {
+        appView.showSlideUpCurrent(fab);
     }
 }

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey800"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".fragment.DadosSalarioLiqFragment">
 
 
@@ -124,6 +125,15 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
+
     </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/fab" />
+    </android.support.design.widget.CoordinatorLayout>
+
 </LinearLayout>
 
