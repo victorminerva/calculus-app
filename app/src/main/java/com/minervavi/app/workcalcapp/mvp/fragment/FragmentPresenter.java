@@ -3,6 +3,9 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -96,5 +99,12 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     @Override
     public void showSlideUpFragCurrent(FloatingActionButton fab) {
         appView.showSlideUpCurrent(fab);
+    }
+
+    @Override
+    public void replaceContainerSlideWithFragCurrent(FragmentManager fragManager, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.container_slideup, fragment).commit();
     }
 }

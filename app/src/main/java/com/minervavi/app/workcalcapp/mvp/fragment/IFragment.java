@@ -3,6 +3,8 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -27,9 +29,11 @@ public interface IFragment {
         void setActivity(Activity activity);
         void onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto);
         void showSlideUpFragCurrent(FloatingActionButton fab);
+        void replaceContainerSlideWithFragCurrent(FragmentManager fragManager, Fragment fragment);
     }
 
     interface IFragmentView {
         void init(View view);
+        void replaceContainerSlideWithFragCurrent();
     }
 }

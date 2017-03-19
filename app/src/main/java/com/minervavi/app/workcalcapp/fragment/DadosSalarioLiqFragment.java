@@ -41,9 +41,6 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fragmentPresenter = new FragmentPresenter();
-        fragmentPresenter.setView(this.getContext());
-        fragmentPresenter.setActivity(getActivity());
     }
 
     @Override
@@ -71,21 +68,29 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
             @Override
             public void onClick(View v) {
                 fragmentPresenter.showSlideUpFragCurrent(fab);
-                /*FragmentManager fragManager         = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragManager.beginTransaction();;
-                fragmentTransaction.replace(R.id.container_slideup, DadosSalarioLiqFragment.newInstance()).commit();*/
+                replaceContainerSlideWithFragCurrent();
             }
         });
     }
 
     @Override
     public void init(View view) {
+        this.fragmentPresenter   = new FragmentPresenter();
+        this.fragmentPresenter.setView(this.getContext());
+        this.fragmentPresenter.setActivity(getActivity());
+
         this.llDescontos    = (LinearLayout) view.findViewById(R.id.ll_descontos);
         this.etDescontos    = (CurrencyEditText) view.findViewById(R.id.et_descontos);
         this.btnAdd         = (ImageButton) view.findViewById(R.id.btn_add);
         this.etNumDep       = (EditText) view.findViewById(R.id.et_num_dep);
         this.etSalario      = (CurrencyEditText ) view.findViewById(R.id.et_salario);
         this.fab            = (FloatingActionButton) view.findViewById(R.id.fab);
+    }
+
+    @Override
+    public void replaceContainerSlideWithFragCurrent() {
+        ResultDadosSalarioLiqFragment fragment  = ResultDadosSalarioLiqFragment.newInstance();
+        fragmentPresenter.replaceContainerSlideWithFragCurrent(getFragmentManager(), fragment);
     }
 
 }

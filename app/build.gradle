@@ -35,5 +35,6 @@ dependencies {
     compile 'com.vicmikhailau:MaskedEditText:2.0.1'
     compile 'com.github.BlacKCaT27:CurrencyEditText:v1.4.4'
     compile 'com.github.mancj:SlideUp-Android:2.2.1'
+    compile 'com.android.support:gridlayout-v7:25.3.0'
     testCompile 'junit:junit:4.12'
 }

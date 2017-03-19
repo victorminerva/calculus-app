@@ -99,4 +99,13 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                 flGeneralDecimo, flGeneralRetroativo);
         appPresenter.onCategoriaClick(v);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (slideUp.isVisible()) {
+            slideUp.hide();
+        } else {
+            this.finish();
+        }
+    }
 }

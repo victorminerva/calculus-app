@@ -34,7 +34,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
-            android:text="Slide it down"
+            android:text="Deslize para baixo"
             android:textColor="@color/grey400" />
 
         <FrameLayout

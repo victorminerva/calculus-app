@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
 import com.minervavi.app.workcalcapp.mvp.fragment.IFragment;
 
 public class DadosFeriasFragment extends Fragment implements IFragment.IFragmentView {
+
+    private IFragment.IFragmentPresenter fragmentPresenter;
 
     private FloatingActionButton fab;
 
@@ -41,7 +43,8 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Fragment FERIAS", Toast.LENGTH_SHORT).show();
+                fragmentPresenter.showSlideUpFragCurrent(fab);
+                replaceContainerSlideWithFragCurrent();
             }
         });
         return view;
@@ -49,6 +52,16 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
 
     @Override
     public void init(View view) {
+        fragmentPresenter = new FragmentPresenter();
+        fragmentPresenter.setView(this.getContext());
+        fragmentPresenter.setActivity(getActivity());
+
         this.fab = (FloatingActionButton) view.findViewById(R.id.fab);
+    }
+
+    @Override
+    public void replaceContainerSlideWithFragCurrent() {
+        ResultDadosFeriasFragment fragment = ResultDadosFeriasFragment.newInstance();
+        fragmentPresenter.replaceContainerSlideWithFragCurrent(getFragmentManager(), fragment);
     }
 }
