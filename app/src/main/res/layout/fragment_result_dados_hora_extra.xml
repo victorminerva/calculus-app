@@ -37,6 +37,7 @@
                 android:text="Valor unitário hora extra" />
 
             <TextView
+                android:id="@+id/tv_valor_uni_hora_extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -73,6 +74,7 @@
             android:layout_margin="@dimen/spacing_micro">
 
             <TextView
+                android:id="@+id/tv_valor_total_hora_extra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

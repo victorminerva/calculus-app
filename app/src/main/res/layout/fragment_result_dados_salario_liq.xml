@@ -38,6 +38,7 @@
                 android:text="Salário Bruto" />
 
             <TextView
+                android:id="@+id/tv_valor_salario_bruto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -71,12 +72,14 @@
                 android:text="INSS" />
 
             <TextView
+                android:id="@+id/tv_valor_per_inss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="11%" />
 
             <TextView
+                android:id="@+id/tv_valor_inss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -98,13 +101,14 @@
                 android:text="IRRF" />
 
             <TextView
+                android:id="@+id/tv_valor_per_irrf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="7,5%" />
 
             <TextView
-                android:id="@+id/textView53"
+                android:id="@+id/tv_valor_irrf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -126,6 +130,7 @@
                 android:text="Outros Descontos" />
 
             <TextView
+                android:id="@+id/tv_valor_descontos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -162,6 +167,7 @@
             android:layout_margin="@dimen/spacing_micro">
 
             <TextView
+                android:id="@+id/tv_valor_salario_liq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
