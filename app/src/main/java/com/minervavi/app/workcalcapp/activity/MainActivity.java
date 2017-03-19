@@ -18,8 +18,8 @@ import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
 
 public class MainActivity extends AppCompatActivity implements IApp.IAppView, FrameLayout.OnClickListener {
 
-    private AppPresenter appPresenter;
-    private FragmentPresenter fragmentPresenter;
+    private AppPresenter        appPresenter;
+    private FragmentPresenter   fragmentPresenter;
 
     /**
      * Screen's Components
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     private FrameLayout flGeneralDecimo;
     private FrameLayout flGeneralRetroativo;
 
-    private RelativeLayout slideView;
-    private FrameLayout dim;
+    private RelativeLayout  slideView;
+    private FrameLayout     dim;
     /**
      * Slide
      */
