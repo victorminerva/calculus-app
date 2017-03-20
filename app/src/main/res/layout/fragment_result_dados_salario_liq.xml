@@ -84,14 +84,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="11%" />
+                    android:text="@{result.tributos.percentualInss}" />
 
                 <TextView
                     android:id="@+id/tv_valor_inss"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="R$ 350.000,00"
+                    android:text="@{result.tributos.valorInss}"
                     android:textAlignment="textEnd" />
 
             </TableRow>
@@ -113,14 +113,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="7,5%" />
+                    android:text="@{result.tributos.percentualIrrf}" />
 
                 <TextView
                     android:id="@+id/tv_valor_irrf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="R$ 100.000,00"
+                    android:text="@{result.tributos.valorIrrf}"
                     android:textAlignment="textEnd" />
 
             </TableRow>
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="R$ 0,00"
+                    android:text="@{result.outrosDescontos}"
                     android:textAlignment="textEnd" />
             </TableRow>
 
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="R$ 3.050,00"
+                    android:text="@{result.valorLiquido}"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"

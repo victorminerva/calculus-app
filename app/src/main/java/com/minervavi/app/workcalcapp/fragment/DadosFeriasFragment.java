@@ -64,4 +64,10 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
         ResultDadosFeriasFragment fragment = ResultDadosFeriasFragment.newInstance();
         fragmentPresenter.replaceContainerSlideWithFragCurrent(getFragmentManager(), fragment);
     }
+
+    @Override
+    public Boolean validaDadosObrigatorios() {
+        return null;
+    }
+
 }

@@ -13,6 +13,12 @@ public class DadosSalarioLiq implements Parcelable {
     private Integer     numDependentes;
     private Double      descontos;
 
+    public DadosSalarioLiq(Double salarioBruto, Integer numDependentes, Double descontos) {
+        this.salarioBruto = salarioBruto;
+        this.numDependentes = numDependentes;
+        this.descontos = descontos;
+    }
+
     public Double getSalarioBruto() {
         return salarioBruto;
     }
@@ -35,6 +41,15 @@ public class DadosSalarioLiq implements Parcelable {
 
     public void setDescontos(Double descontos) {
         this.descontos = descontos;
+    }
+
+    @Override
+    public String toString() {
+        return "DadosSalarioLiq{" +
+                "salarioBruto=" + salarioBruto +
+                ", numDependentes=" + numDependentes +
+                ", descontos=" + descontos +
+                '}';
     }
 
     @Override

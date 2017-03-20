@@ -64,4 +64,10 @@ public class DadosHoraExtraFragment extends Fragment implements IFragment.IFragm
         ResultDadosHoraExtraFragment fragment = ResultDadosHoraExtraFragment.newInstance();
         fragmentPresenter.replaceContainerSlideWithFragCurrent(getFragmentManager(), fragment);
     }
+
+    @Override
+    public Boolean validaDadosObrigatorios() {
+        return null;
+    }
+
 }

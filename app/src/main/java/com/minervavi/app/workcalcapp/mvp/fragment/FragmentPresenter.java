@@ -26,7 +26,6 @@ import java.util.List;
 public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
     private IApp.IAppView appView;
-    private IFragment.IFragmentView fragmentView;
 
     /** Context */
     private Context context;
@@ -58,7 +57,7 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     }
 
     @Override
-    public void onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto) {
+    public List<String> onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto) {
         if ("".equals(etDesconto.getText().toString())) {
             etDesconto.setError("Preencha este campo!");
         } else {
@@ -68,20 +67,13 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
             final View rowDesconto = layoutInflater.inflate(R.layout.row_desconto, null);
 
             final TextView tvDesconto = (TextView) rowDesconto.findViewById(R.id.tv_desconto);
-            ImageButton btnRemove = (ImageButton) rowDesconto.findViewById(R.id.remove);
-
             tvDesconto.setText(etDesconto.getText().toString());
 
+            ImageButton btnRemove = (ImageButton) rowDesconto.findViewById(R.id.remove);
             btnRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((LinearLayout) rowDesconto.getParent()).removeView(rowDesconto);
-
-                    if(listOfDescontos.contains(String.valueOf(etDesconto.getRawValue())))
-                        listOfDescontos.remove(String.valueOf(etDesconto.getRawValue()));
-
-                    btnAdd.setVisibility(View.VISIBLE);
-                    etDesconto.setVisibility(View.VISIBLE);
+                    onRemoveDescontoClick(rowDesconto, etDesconto, btnAdd);
                 }
             });
 
@@ -94,6 +86,20 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
                 etDesconto.setVisibility(View.GONE);
             }
         }
+
+        return listOfDescontos;
+    }
+
+    @Override
+    public List<String> onRemoveDescontoClick(View rowDesconto, CurrencyEditText etDesconto, ImageButton btnAdd) {
+        ((LinearLayout) rowDesconto.getParent()).removeView(rowDesconto);
+
+        if(listOfDescontos.contains(String.valueOf(etDesconto.getRawValue())))
+            listOfDescontos.remove(String.valueOf(etDesconto.getRawValue()));
+
+        btnAdd.setVisibility(View.VISIBLE);
+        etDesconto.setVisibility(View.VISIBLE);
+        return listOfDescontos;
     }
 
     @Override
@@ -107,4 +113,5 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
         fragmentTransaction.replace(R.id.container_slideup, fragment).commit();
     }
+
 }

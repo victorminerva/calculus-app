@@ -64,4 +64,10 @@ public class DadosDecimoFragment extends Fragment implements IFragment.IFragment
         ResultDadosDecimoFragment fragment = ResultDadosDecimoFragment.newInstance();
         fragmentPresenter.replaceContainerSlideWithFragCurrent(getFragmentManager(), fragment);
     }
+
+    @Override
+    public Boolean validaDadosObrigatorios() {
+        return null;
+    }
+
 }

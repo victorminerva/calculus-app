@@ -13,14 +13,18 @@ import com.minervavi.app.workcalcapp.databinding.FragmentResultDadosSalarioLiqBi
 import com.minervavi.app.workcalcapp.databinding.domain.DadosResult;
 
 public class ResultDadosSalarioLiqFragment extends Fragment {
+
     private FragmentResultDadosSalarioLiqBinding binding;
+
+    private static DadosResult result;
 
     public ResultDadosSalarioLiqFragment() {
         // Required empty public constructor
     }
 
-    public static ResultDadosSalarioLiqFragment newInstance() {
+    public static ResultDadosSalarioLiqFragment newInstance(DadosResult resultParam) {
         ResultDadosSalarioLiqFragment fragment = new ResultDadosSalarioLiqFragment();
+        result = resultParam;
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -35,8 +39,6 @@ public class ResultDadosSalarioLiqFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result_dados_salario_liq, container, false);
-
-        DadosResult result = new DadosResult();
 
         binding.setResult(result);
 
