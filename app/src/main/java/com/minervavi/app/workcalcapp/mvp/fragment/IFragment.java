@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
@@ -35,7 +36,7 @@ public interface IFragment {
 
         List<String> onAddDescontoClick(final CurrencyEditText etDesconto, final ImageButton btnAdd, final LinearLayout llDesconto);
 
-        List<String> onRemoveDescontoClick(View rowDesconto, final CurrencyEditText etDesconto, final ImageButton btnAdd);
+        List<String> onRemoveDescontoClick(View rowDesconto, final CurrencyEditText etDesconto, TextView tvDesconto, final ImageButton btnAdd);
 
         void showSlideUpFragCurrent(FloatingActionButton fab);
 

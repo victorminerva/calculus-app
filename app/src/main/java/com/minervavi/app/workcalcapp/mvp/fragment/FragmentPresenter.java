@@ -73,7 +73,7 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
             btnRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onRemoveDescontoClick(rowDesconto, etDesconto, btnAdd);
+                    onRemoveDescontoClick(rowDesconto, etDesconto, tvDesconto, btnAdd);
                 }
             });
 
@@ -91,12 +91,14 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     }
 
     @Override
-    public List<String> onRemoveDescontoClick(View rowDesconto, CurrencyEditText etDesconto, ImageButton btnAdd) {
+    public List<String> onRemoveDescontoClick(View rowDesconto, CurrencyEditText etDesconto, TextView tvDesconto, ImageButton btnAdd) {
         ((LinearLayout) rowDesconto.getParent()).removeView(rowDesconto);
 
-        if(listOfDescontos.contains(String.valueOf(etDesconto.getRawValue())))
-            listOfDescontos.remove(String.valueOf(etDesconto.getRawValue()));
+        String desc = tvDesconto.getText().toString().replaceAll("[R$,.]", "");
 
+        if(listOfDescontos.contains(desc)) {
+            listOfDescontos.remove(desc);
+        }
         btnAdd.setVisibility(View.VISIBLE);
         etDesconto.setVisibility(View.VISIBLE);
         return listOfDescontos;
