@@ -15,8 +15,9 @@ import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.databinding.domain.DadosInput;
 import com.minervavi.app.workcalcapp.databinding.domain.DadosResult;
-import com.minervavi.app.workcalcapp.mvp.calcular.CalcularPresenter;
+import com.minervavi.app.workcalcapp.mvp.calcular.CalcularSalarioLiqPresenter;
 import com.minervavi.app.workcalcapp.mvp.calcular.ICalcular;
+import com.minervavi.app.workcalcapp.mvp.calcular.ICalcularSalarioLiq;
 import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
 import com.minervavi.app.workcalcapp.mvp.fragment.IFragment;
 
@@ -25,7 +26,7 @@ import java.util.List;
 public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFragmentView, ICalcular.ICalcularView {
 
     private IFragment.IFragmentPresenter fragmentPresenter;
-    private ICalcular.ICalcularPresenter calcularPresenter;
+    private ICalcularSalarioLiq          calcularPresenter;
 
     private CurrencyEditText        etSalario;
     private EditText                etNumDep;
@@ -104,7 +105,7 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
         this.fragmentPresenter.setView(this.getContext());
         this.fragmentPresenter.setActivity(getActivity());
 
-        this.calcularPresenter  = new CalcularPresenter();
+        this.calcularPresenter  = new CalcularSalarioLiqPresenter();
         this.result             = new DadosResult();
 
         this.llDescontos    = (LinearLayout) view.findViewById(R.id.ll_descontos);
@@ -133,14 +134,6 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
 
     @Override
     public Boolean validaDadosObrigatorios() {
-        Boolean isValid = Boolean.TRUE;
-        if(etSalario.getText() == null || "".equals(etSalario.getText().toString().trim())){
-            etSalario.setError("Preencha este campo!");
-            isValid = Boolean.FALSE;
-        }
-        if(etNumDep.getText() == null || "".equals(etNumDep.getText().toString().trim())){
-            etNumDep.setText("0");
-        }
-        return isValid;
+        return calcularPresenter.validaDadosObrigatorios(etSalario, etNumDep);
     }
 }

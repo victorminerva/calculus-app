@@ -58,4 +58,6 @@ public interface AppConstants {
     Double IRRF_27_5_PC_DEDUCAO     = 869.36;
 
     Double DESCONTO_POR_DEPENDENTE  = 189.59;
+
+    Double SALARIO_MINIMO           = 937.00;
 }
