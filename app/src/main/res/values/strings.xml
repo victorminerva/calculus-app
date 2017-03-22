@@ -30,4 +30,10 @@
     <string name="rb_parcela_segunda">Segunda</string>
 
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+
+    <!-- Valores para chave valor -->
+    <string name="preference_file_key">app_salario_key</string>
+    <string name="key_descontos">key_descontos</string>
+    <string name="key_salario_bruto">key_salario_bruto</string>
+    <string name="key_num_dependentes">key_num_dependentes</string>
 </resources>

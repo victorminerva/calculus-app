@@ -108,4 +108,10 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
             this.finish();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appPresenter.removeDadosSalvos();
+    }
 }

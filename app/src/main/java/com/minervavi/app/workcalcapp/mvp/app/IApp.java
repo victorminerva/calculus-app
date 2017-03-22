@@ -15,6 +15,7 @@ import com.mancj.slideup.SlideUp;
 public interface IApp {
 
     interface IAppModel {
+        void removeDadosSalvos();
     }
 
     interface IAppPresenter {
@@ -26,6 +27,8 @@ public interface IApp {
         void setView(IAppView view);
         void setFragmentManager(FragmentManager fragmentManager);
         void showSlideUpCurrent(SlideUp slideUp, FloatingActionButton fab);
+
+        void removeDadosSalvos();
     }
 
     interface IAppView {

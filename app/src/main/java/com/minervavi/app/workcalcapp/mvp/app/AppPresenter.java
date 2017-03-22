@@ -104,4 +104,8 @@ public class AppPresenter implements IApp.IAppPresenter {
         });
     }
 
+    @Override
+    public void removeDadosSalvos() {
+        appModel.removeDadosSalvos();
+    }
 }
