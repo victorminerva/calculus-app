@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +43,9 @@ public interface IFragment {
 
         void replaceContainerSlideWithFragCurrent(FragmentManager fragManager, Fragment fragment);
 
+        void manterDadosSalarioLiq(EditText etSalario, EditText etNumDep, List<String> listDescontos);
+
+        List<String> retrieveListOfDesconts();
     }
 
     interface IFragmentView {

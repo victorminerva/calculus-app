@@ -1,5 +1,7 @@
 package com.minervavi.app.workcalcapp.fragment;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -45,6 +47,8 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
     private Double                  salarioLiq;
 
     private List<String>            listDescontos;
+
+    private SharedPreferences       preferences;
 
     public DadosSalarioLiqFragment() {
         // Required empty public constructor
@@ -101,6 +105,8 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
 
     @Override
     public void init(View view) {
+        preferences = getContext().getSharedPreferences(getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
+
         this.fragmentPresenter  = new FragmentPresenter();
         this.fragmentPresenter.setView(this.getContext());
         this.fragmentPresenter.setActivity(getActivity());
@@ -114,6 +120,17 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
         this.etNumDep       = (EditText) view.findViewById(R.id.et_num_dep);
         this.etSalario      = (CurrencyEditText ) view.findViewById(R.id.et_salario);
         this.fab            = (FloatingActionButton) view.findViewById(R.id.fab);
+
+        etSalario.setText(preferences.getString(getString(R.string.key_salario_bruto), ""));
+        etNumDep.setText(preferences.getString(getString(R.string.key_num_dependentes), ""));
+        listDescontos = fragmentPresenter.retrieveListOfDesconts();
+        if (listDescontos != null && !listDescontos.isEmpty()) {
+            for (String desconto : listDescontos) {
+                etDescontos.setText(desconto);
+                listDescontos = fragmentPresenter.onAddDescontoClick(etDescontos, btnAdd, llDescontos);
+                etDescontos.setText("0");
+            }
+        }
     }
 
     @Override
@@ -135,5 +152,11 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
     @Override
     public Boolean validaDadosObrigatorios() {
         return calcularPresenter.validaDadosObrigatorios(etSalario, etNumDep);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fragmentPresenter.manterDadosSalarioLiq(etSalario, etNumDep, listDescontos);
     }
 }

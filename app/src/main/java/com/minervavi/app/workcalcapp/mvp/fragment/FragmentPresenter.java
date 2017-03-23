@@ -2,17 +2,21 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
 
@@ -25,12 +29,17 @@ import java.util.List;
 
 public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
-    private IApp.IAppView appView;
+    private IApp.IAppView               appView;
 
     /** Context */
-    private Context context;
+    private Context                     context;
     /** Lists */
-    private List<String> listOfDescontos;
+    private List<String>                listOfDescontos;
+    /** Preferences*/
+    private SharedPreferences           preferences;
+    private SharedPreferences.Editor    editor;
+
+    private Gson                        gson;
 
     public FragmentPresenter(){
         listOfDescontos = new ArrayList<>();
@@ -114,6 +123,30 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
         FragmentTransaction fragmentTransaction = fragManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.container_slideup, fragment).commit();
+    }
+
+    @Override
+    public void manterDadosSalarioLiq(EditText etSalario, EditText etNumDep, List<String> listDescontos) {
+        gson = new Gson();
+        gson.toJson(listDescontos);
+
+        editor.putString(getContext().getString(R.string.key_salario_bruto), etSalario.getText().toString());
+        editor.putString(getContext().getString(R.string.key_num_dependentes), etNumDep.getText().toString());
+        editor.putString(getContext().getString(R.string.key_descontos), gson.toJson(listDescontos));
+        editor.commit();
+    }
+
+    @Override
+    public List<String> retrieveListOfDesconts() {
+        preferences     = getContext().getSharedPreferences(getContext().getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
+        editor          = preferences.edit();
+        gson = new Gson();
+        String descontos = preferences.getString(getContext().getString(R.string.key_descontos), null);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gson = gsonBuilder.create();
+
+        return gson.fromJson(descontos, List.class);
     }
 
 }

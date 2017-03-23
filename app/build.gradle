@@ -36,5 +36,6 @@ dependencies {
     compile 'com.github.BlacKCaT27:CurrencyEditText:v1.4.4'
     compile 'com.github.mancj:SlideUp-Android:2.2.1'
     compile 'com.android.support:gridlayout-v7:25.3.0'
+    compile 'com.google.code.gson:gson:2.2.4'
     testCompile 'junit:junit:4.12'
 }
