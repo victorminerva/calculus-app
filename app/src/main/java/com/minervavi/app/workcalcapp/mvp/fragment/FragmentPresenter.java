@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
@@ -126,15 +128,45 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     }
 
     @Override
-    public void manterDadosSalarioLiq(EditText etSalario, EditText etNumDep, List<String> listDescontos) {
+    public void manterDadosSalarioLiq(SharedPreferences preferences, EditText etSalario, EditText etNumDep, List<String> listDescontos) {
         gson = new Gson();
         gson.toJson(listDescontos);
+        editor          = preferences.edit();
 
         editor.putString(getContext().getString(R.string.key_salario_bruto), etSalario.getText().toString());
         editor.putString(getContext().getString(R.string.key_num_dependentes), etNumDep.getText().toString());
         editor.putString(getContext().getString(R.string.key_descontos), gson.toJson(listDescontos));
         editor.commit();
     }
+
+    @Override
+    public void manterDadosFerias(SharedPreferences preferences,CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar) {
+        editor          = preferences.edit();
+
+        editor.putString(getContext().getString(R.string.key_valor_medio_hora_extra), etvalormediohe.getText().toString());
+        editor.putString(getContext().getString(R.string.key_dias_de_ferias), etdiasferias.getText().toString());
+        editor.putInt(getContext().getString(R.string.key_abono_pecuniario), radioabonar.getCheckedRadioButtonId());
+        editor.putInt(getContext().getString(R.string.key_adiantar_decima), radioadiantar.getCheckedRadioButtonId());
+        editor.commit();
+    }
+
+    @Override
+    public void recuperaDadosFerias(View view, SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar) {
+        etvalormediohe.setText(preferences.getString(getContext().getString(R.string.key_valor_medio_hora_extra), ""));
+        etdiasferias.setText(preferences.getString(getContext().getString(R.string.key_dias_de_ferias), ""));
+        int abonoPecuniarioID   = preferences.getInt(getContext().getString(R.string.key_abono_pecuniario), -1);
+        int adiantarDecima      = preferences.getInt(getContext().getString(R.string.key_adiantar_decima), -1);
+
+        if(abonoPecuniarioID != -1) {
+            RadioButton rbAbono = (RadioButton) view.findViewById(abonoPecuniarioID);
+            rbAbono.setChecked(true);
+        }
+        if(adiantarDecima != -1) {
+            RadioButton rbAdiantar = (RadioButton) view.findViewById(adiantarDecima);
+            rbAdiantar.setChecked(true);
+        }
+    }
+
 
     @Override
     public List<String> retrieveListOfDesconts() {

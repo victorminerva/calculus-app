@@ -2,6 +2,7 @@ package com.minervavi.app.workcalcapp.mvp.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
@@ -43,7 +45,11 @@ public interface IFragment {
 
         void replaceContainerSlideWithFragCurrent(FragmentManager fragManager, Fragment fragment);
 
-        void manterDadosSalarioLiq(EditText etSalario, EditText etNumDep, List<String> listDescontos);
+        void manterDadosSalarioLiq(SharedPreferences preferences, EditText etSalario, EditText etNumDep, List<String> listDescontos);
+
+        void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
+
+        void recuperaDadosFerias(View view, SharedPreferences preferences,CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
 
         List<String> retrieveListOfDesconts();
     }

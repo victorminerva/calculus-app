@@ -36,4 +36,17 @@
     <string name="key_descontos">key_descontos</string>
     <string name="key_salario_bruto">key_salario_bruto</string>
     <string name="key_num_dependentes">key_num_dependentes</string>
+    <string name="key_valor_medio_hora_extra">key_valor_medio_hora_extra</string>
+    <string name="key_dias_de_ferias">key_dias_de_ferias</string>
+    <string name="key_abono_pecuniario">key_abono_pecuniario</string>
+    <string name="key_adiantar_decima">key_adiantar_decima</string>
+    <string name="key_jornada_mensal">key_jornada_mensal</string>
+    <string name="key_adicional_hora_extra">key_adicional_hora_extra</string>
+    <string name="key_num_hora_extra">key_num_hora_extra</string>
+    <string name="key_num_meses_trabalhados">key_num_meses_trabalhados</string>
+    <string name="key_parcela">key_parcela</string>
+    <string name="key_salario_base_reaj">key_salario_base_reaj</string>
+    <string name="key_percentual_aumento">key_percentual_aumento</string>
+    <string name="key_num_meses_trabalhados_reaj">key_num_meses_trabalhados_reaj</string>
+
 </resources>

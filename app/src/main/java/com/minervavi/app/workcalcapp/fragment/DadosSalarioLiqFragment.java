@@ -157,6 +157,6 @@ public class DadosSalarioLiqFragment extends Fragment implements IFragment.IFrag
     @Override
     public void onDestroy() {
         super.onDestroy();
-        fragmentPresenter.manterDadosSalarioLiq(etSalario, etNumDep, listDescontos);
+        fragmentPresenter.manterDadosSalarioLiq(preferences, etSalario, etNumDep, listDescontos);
     }
 }
