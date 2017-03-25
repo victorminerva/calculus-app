@@ -16,9 +16,9 @@ import java.util.List;
 
 public class CalcularSalarioLiqPresenter implements ICalcularSalarioLiq {
 
-    NumberFormat currencyFormat;
-    NumberFormat percentFormat ;
-    CalcularPresenter calcularPresenter;
+    private NumberFormat currencyFormat;
+    private NumberFormat percentFormat ;
+    private CalcularPresenter calcularPresenter;
 
     public CalcularSalarioLiqPresenter() {
         calcularPresenter = new CalcularPresenter();
@@ -65,13 +65,6 @@ public class CalcularSalarioLiqPresenter implements ICalcularSalarioLiq {
     }
 
     @Override
-    public Double calculaDescontoPorDependente(Double inss, DadosInput dadosInput) {
-        Double descontoPorDependente = dadosInput.getDadosSalarioLiq().getNumDependentes() * AppConstants.DESCONTO_POR_DEPENDENTE;
-        inss -= descontoPorDependente;
-        return inss;
-    }
-
-    @Override
     public DadosInput populaDadosSalarioLiq(CurrencyEditText etSalario, EditText etNumDep, Double descontoTotal) {
         Long    salario         = etSalario.getRawValue();
         Integer numDependentes  = Integer.parseInt(etNumDep.getText().toString());
@@ -97,7 +90,7 @@ public class CalcularSalarioLiqPresenter implements ICalcularSalarioLiq {
             isValid = Boolean.FALSE;
         }
 
-        if(etSalario.getRawValue() < AppConstants.SALARIO_MINIMO){
+        if(etSalario.getRawValue() < AppConstants.SALARIO_MINIMO && isValid){
             etSalario.setError("Salário inferior ao salário Mínimo ("+ currencyFormat.format(AppConstants.SALARIO_MINIMO) +")");
             isValid = Boolean.FALSE;
         }

@@ -12,6 +12,7 @@
     <string name="tv_descontos">Descontos</string>
     <string name="tv_valor_medio_hora_extra">Valor Médio de Horas Extras no Ano</string>
     <string name="tv_dias_de_ferias">Dias de Férias</string>
+    <string name="tv_terco_ferias">1/3 Férias</string>
     <string name="tv_abono_pecuniario">Abono Pecuniário \n(Vender 1/3)</string>
     <string name="tv_adiantar_parcela">Adiantar 1ª parcela 13º</string>
     <string name="tv_num_hora_extra">Número de horas extras</string>
@@ -20,6 +21,10 @@
     <string name="tv_num_meses_trabalhados">Número Meses Trabalhados</string>
     <string name="tv_percentual">Percentual de aumento (%)</string>
     <string name="tv_salario_anterior">Salário Base Reajuste</string>
+    <string name="tv_abono_pecuniario_result">Abono Pecuniário</string>
+    <string name="tv_terco_abono_pec">1/3 Abono Pecuniário</string>
+    <string name="tv_adiantamento_decimo">Adiantamento 1ª Parcela 13º</string>
+
 
     <string name="icon_adiciona">Adiciona</string>
     <string name="nao">Não</string>

@@ -15,15 +15,6 @@ import java.util.List;
 public interface ICalcularSalarioLiq extends ICalcular.ICalcularPresenter {
 
     /**
-     * Responsável por verificar o Percentual do IRRF através da diferença do Salário Bruto e INSS.
-     *
-     * @param dadosInput
-     * @param inss
-     * @return
-     */
-    Double percentualIRRF(DadosInput dadosInput, Double inss);
-
-    /**
      * Responsável por calcular o Salário Liquído através da diferença do Salário Bruto, INSS, IRRF e Descontos.
      * <p>
      * A composição do Salário Liquido é feito através dos passos:
@@ -50,8 +41,6 @@ public interface ICalcularSalarioLiq extends ICalcular.ICalcularPresenter {
      * @return
      */
     Double calcularDescontos(List<String> list);
-
-    Double calculaDescontoPorDependente(Double inss, DadosInput dadosInput);
 
     DadosInput populaDadosSalarioLiq(CurrencyEditText etSalario, EditText etNumDep, Double descontoTotal);
 

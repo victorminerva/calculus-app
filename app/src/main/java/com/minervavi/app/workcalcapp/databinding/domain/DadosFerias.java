@@ -71,6 +71,13 @@ public class DadosFerias implements Parcelable {
     public DadosFerias() {
     }
 
+    public DadosFerias(Double mediaHorasExtrasAno, Integer qtdeDiasFerias, Boolean abonoPecuniario, Boolean adiantarPrimeiraDecimo) {
+        this.mediaHorasExtrasAno = mediaHorasExtrasAno;
+        this.qtdeDiasFerias = qtdeDiasFerias;
+        this.abonoPecuniario = abonoPecuniario;
+        this.adiantarPrimeiraDecimo = adiantarPrimeiraDecimo;
+    }
+
     protected DadosFerias(Parcel in) {
         this.mediaHorasExtrasAno = (Double) in.readValue(Double.class.getClassLoader());
         this.qtdeDiasFerias = (Integer) in.readValue(Integer.class.getClassLoader());

@@ -18,6 +18,11 @@ public class DadosInput implements Parcelable {
         this.dadosSalarioLiq = new DadosSalarioLiq(salarioBruto, numDependentes, descontos);
     }
 
+    public DadosInput(Double salarioBruto, Integer numDependentes, Double valorMedioHE, Integer qtdDias, Boolean abonoPec, Boolean adiantarDecimo) {
+        this.dadosSalarioLiq = new DadosSalarioLiq(salarioBruto, numDependentes, 0D);
+        this.dadosFerias    = new DadosFerias(valorMedioHE, qtdDias, abonoPec, adiantarDecimo);
+    }
+
     public DadosSalarioLiq getDadosSalarioLiq() {
         return dadosSalarioLiq;
     }

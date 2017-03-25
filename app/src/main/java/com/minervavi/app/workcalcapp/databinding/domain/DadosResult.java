@@ -9,10 +9,14 @@ public class DadosResult {
     private String      valorBruto;
     private String      valorLiquido;
     private String      valorTercoFerias;
+    private String      valorAbonoPecuniario;
+    private String      valorTercoAbono;
+    private String      valorAdiantamento;
     private String      outrosDescontos;
     private Tributos    tributos;
 
-    public DadosResult() {}
+    public DadosResult() {
+    }
 
     public DadosResult(String valorInss, String percentualInss, String valorIrrf, String percentualIrrf) {
         this.tributos = new Tributos(valorInss, percentualInss, valorIrrf, percentualIrrf);
@@ -40,6 +44,30 @@ public class DadosResult {
 
     public void setValorTercoFerias(String valorTercoFerias) {
         this.valorTercoFerias = valorTercoFerias;
+    }
+
+    public String getValorAbonoPecuniario() {
+        return valorAbonoPecuniario;
+    }
+
+    public void setValorAbonoPecuniario(String valorAbonoPecuniario) {
+        this.valorAbonoPecuniario = valorAbonoPecuniario;
+    }
+
+    public String getValorTercoAbono() {
+        return valorTercoAbono;
+    }
+
+    public void setValorTercoAbono(String valorTercoAbono) {
+        this.valorTercoAbono = valorTercoAbono;
+    }
+
+    public String getValorAdiantamento() {
+        return valorAdiantamento;
+    }
+
+    public void setValorAdiantamento(String valorAdiantamento) {
+        this.valorAdiantamento = valorAdiantamento;
     }
 
     public String getOutrosDescontos() {
