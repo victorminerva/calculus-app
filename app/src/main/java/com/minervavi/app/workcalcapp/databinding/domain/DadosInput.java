@@ -28,6 +28,11 @@ public class DadosInput implements Parcelable {
         this.dadosHoraExtra     = new DadosHoraExtra(jornadaMensal, adicionalHoraExtra, numHoraExtra);
     }
 
+    public DadosInput(Double salarioBruto, Integer numDependentes, Integer numeroMeses, ParcelaEnum parcela) {
+        this.dadosSalarioLiq    = new DadosSalarioLiq(salarioBruto, numDependentes, 0D);
+        this.dadosDecimo        = new DadosDecimo(numeroMeses, parcela);
+    }
+
     public DadosSalarioLiq getDadosSalarioLiq() {
         return dadosSalarioLiq;
     }

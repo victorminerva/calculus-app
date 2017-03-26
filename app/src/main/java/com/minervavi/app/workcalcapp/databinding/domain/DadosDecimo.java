@@ -12,6 +12,11 @@ public class DadosDecimo implements Parcelable {
     private Integer     numMesesTrabalhados;
     private ParcelaEnum parcela;
 
+    public DadosDecimo(Integer numMesesTrabalhados, ParcelaEnum parcela) {
+        this.numMesesTrabalhados    = numMesesTrabalhados;
+        this.parcela                = parcela;
+    }
+
     public Integer getNumMesesTrabalhados() {
         return numMesesTrabalhados;
     }

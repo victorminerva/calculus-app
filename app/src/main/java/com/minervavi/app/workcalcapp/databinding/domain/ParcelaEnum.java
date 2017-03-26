@@ -6,6 +6,15 @@ package com.minervavi.app.workcalcapp.databinding.domain;
 
 public enum ParcelaEnum {
 
-    UNICA, PRIMEIRA, SEGUNDA;
+    UNICA("Única"), PRIMEIRA("1ª"), SEGUNDA("2ª");
 
+    private String value;
+
+    ParcelaEnum(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

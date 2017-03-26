@@ -48,6 +48,8 @@ public interface IFragment {
 
         void manterDadosSalarioLiq(SharedPreferences preferences, EditText etSalario, EditText etNumDep, List<String> listDescontos);
 
+        List<String> retrieveListOfDesconts();
+
         void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
 
         void recuperaDadosFerias(View view, SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
@@ -56,7 +58,9 @@ public interface IFragment {
 
         void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
 
-        List<String> retrieveListOfDesconts();
+        void manterDadosDecimo(SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela);
+
+        void recuperaDadosDecimo(View view, SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela);
     }
 
     interface IFragmentView {

@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
+import com.minervavi.app.workcalcapp.util.AppConstants;
 import com.vicmikhailau.maskededittext.MaskedEditText;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
     private Gson                        gson;
 
-    public FragmentPresenter(){
+    public FragmentPresenter() {
         listOfDescontos = new ArrayList<>();
     }
 
@@ -108,7 +110,7 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
 
         String desc = tvDesconto.getText().toString().replaceAll("[R$,.]", "");
 
-        if(listOfDescontos.contains(desc)) {
+        if (listOfDescontos.contains(desc)) {
             listOfDescontos.remove(desc);
         }
         btnAdd.setVisibility(View.VISIBLE);
@@ -132,7 +134,7 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     public void manterDadosSalarioLiq(SharedPreferences preferences, EditText etSalario, EditText etNumDep, List<String> listDescontos) {
         gson = new Gson();
         gson.toJson(listDescontos);
-        editor          = preferences.edit();
+        editor = preferences.edit();
 
         editor.putString(getContext().getString(R.string.key_salario_bruto), etSalario.getText().toString());
         editor.putString(getContext().getString(R.string.key_num_dependentes), etNumDep.getText().toString());
@@ -141,31 +143,27 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
     }
 
     @Override
-    public void manterDadosFerias(SharedPreferences preferences,CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar) {
+    public List<String> retrieveListOfDesconts() {
+        preferences     = getContext().getSharedPreferences(getContext().getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
         editor          = preferences.edit();
+        gson = new Gson();
+        String descontos = preferences.getString(getContext().getString(R.string.key_descontos), null);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gson = gsonBuilder.create();
+
+        return gson.fromJson(descontos, List.class);
+    }
+
+    @Override
+    public void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar) {
+        editor = preferences.edit();
 
         editor.putString(getContext().getString(R.string.key_valor_medio_hora_extra), etvalormediohe.getText().toString());
         editor.putString(getContext().getString(R.string.key_dias_de_ferias), etdiasferias.getText().toString());
         editor.putInt(getContext().getString(R.string.key_abono_pecuniario), radioabonar.getCheckedRadioButtonId());
         editor.putInt(getContext().getString(R.string.key_adiantar_decima), radioadiantar.getCheckedRadioButtonId());
         editor.commit();
-    }
-
-    @Override
-    public void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
-        editor          = preferences.edit();
-
-        editor.putString(getContext().getString(R.string.key_jornada_mensal), etJornadaMensal.getText().toString());
-        editor.putString(getContext().getString(R.string.key_adicional_hora_extra), etAdicionalHE.getText().toString());
-        editor.putString(getContext().getString(R.string.key_num_hora_extra), etNumHoraExtra.getText().toString());
-        editor.commit();
-    }
-
-    @Override
-    public void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
-        etJornadaMensal.setText(preferences.getString(getContext().getString(R.string.key_jornada_mensal), ""));
-        etAdicionalHE.setText(preferences.getString(getContext().getString(R.string.key_adicional_hora_extra), ""));
-        etNumHoraExtra.setText(preferences.getString(getContext().getString(R.string.key_num_hora_extra), ""));
     }
 
     @Override
@@ -185,18 +183,42 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
         }
     }
 
+    @Override
+    public void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
+        editor = preferences.edit();
+
+        editor.putString(getContext().getString(R.string.key_jornada_mensal), etJornadaMensal.getText().toString());
+        editor.putString(getContext().getString(R.string.key_adicional_hora_extra), etAdicionalHE.getText().toString());
+        editor.putString(getContext().getString(R.string.key_num_hora_extra), etNumHoraExtra.getText().toString());
+        editor.commit();
+    }
 
     @Override
-    public List<String> retrieveListOfDesconts() {
-        preferences     = getContext().getSharedPreferences(getContext().getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
-        editor          = preferences.edit();
-        gson = new Gson();
-        String descontos = preferences.getString(getContext().getString(R.string.key_descontos), null);
+    public void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
+        etJornadaMensal.setText(preferences.getString(getContext().getString(R.string.key_jornada_mensal), ""));
+        etAdicionalHE.setText(preferences.getString(getContext().getString(R.string.key_adicional_hora_extra), ""));
+        etNumHoraExtra.setText(preferences.getString(getContext().getString(R.string.key_num_hora_extra), ""));
+    }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gson = gsonBuilder.create();
+    @Override
+    public void manterDadosDecimo(SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela) {
+        editor = preferences.edit();
 
-        return gson.fromJson(descontos, List.class);
+        editor.putString(getContext().getString(R.string.key_num_meses_trabalhados_reaj), etNumMeses.getText().toString());
+        editor.putInt(getContext().getString(R.string.key_parcela), radioParcela.getCheckedRadioButtonId());
+        editor.commit();
+    }
+
+
+    @Override
+    public void recuperaDadosDecimo(View view, SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela) {
+        etNumMeses.setText(preferences.getString(getContext().getString(R.string.key_num_meses_trabalhados_reaj), ""));
+        int parcelaID = preferences.getInt(getContext().getString(R.string.key_parcela), -1);
+        Log.d(AppConstants.APP_SALARIO, "recuperaDadosDecimo: " + parcelaID);
+        if(parcelaID != -1) {
+            RadioButton rbParcela = (RadioButton) view.findViewById(parcelaID);
+            rbParcela.setChecked(true);
+        }
     }
 
 }

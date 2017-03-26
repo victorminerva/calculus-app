@@ -16,6 +16,8 @@ public class DadosResult {
     private String      outrosDescontos;
     private Tributos    tributos;
 
+    private ParcelaEnum parcela;
+
     public DadosResult() {
     }
 
@@ -93,5 +95,13 @@ public class DadosResult {
 
     public void setTributos(Tributos tributos) {
         this.tributos = tributos;
+    }
+
+    public ParcelaEnum getParcela() {
+        return parcela;
+    }
+
+    public void setParcela(ParcelaEnum parcela) {
+        this.parcela = parcela;
     }
 }

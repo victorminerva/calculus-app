@@ -85,9 +85,11 @@ public class CalcularFeriasPresenter implements ICalcularFerias {
 
     @Override
     public DadosInput populaDadosFerias(View view, CurrencyEditText etValorMedioHE, EditText etDiasFerias, RadioGroup radioAbonar, RadioGroup radioadiantar) {
-        preferences = view.getContext().getSharedPreferences(view.getContext().getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
         RadioButton rbAbonar;
         RadioButton rbAdiantar;
+
+        preferences = view.getContext().getSharedPreferences(view.getContext().getString(R.string.preference_file_key), Activity.MODE_PRIVATE);
+
         Long valorMedioHE       = etValorMedioHE.getRawValue();
         Integer qtdDias         = Integer.parseInt(etDiasFerias.getText().toString());
         Boolean abonoPec        = Boolean.FALSE;
