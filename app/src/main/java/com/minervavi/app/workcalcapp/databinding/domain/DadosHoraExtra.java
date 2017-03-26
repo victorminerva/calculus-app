@@ -13,6 +13,12 @@ public class DadosHoraExtra implements Parcelable {
     private Double      adicionalHoraExtra;
     private Double      numHoraExtra;
 
+    public DadosHoraExtra(Double jornadaMensal, Double adicionalHoraExtra, Double numHoraExtra) {
+        this.jornadaMensal      = jornadaMensal;
+        this.adicionalHoraExtra = adicionalHoraExtra;
+        this.numHoraExtra       = numHoraExtra;
+    }
+
     public Double getJornadaMensal() {
         return jornadaMensal;
     }

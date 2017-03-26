@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
+import com.vicmikhailau.maskededittext.MaskedEditText;
 
 import java.util.List;
 
@@ -49,7 +50,11 @@ public interface IFragment {
 
         void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
 
-        void recuperaDadosFerias(View view, SharedPreferences preferences,CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
+        void recuperaDadosFerias(View view, SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
+
+        void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
+
+        void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
 
         List<String> retrieveListOfDesconts();
     }

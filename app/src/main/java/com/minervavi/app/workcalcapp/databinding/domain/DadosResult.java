@@ -12,6 +12,7 @@ public class DadosResult {
     private String      valorAbonoPecuniario;
     private String      valorTercoAbono;
     private String      valorAdiantamento;
+    private String      valorUnitHoraExtra;
     private String      outrosDescontos;
     private Tributos    tributos;
 
@@ -68,6 +69,14 @@ public class DadosResult {
 
     public void setValorAdiantamento(String valorAdiantamento) {
         this.valorAdiantamento = valorAdiantamento;
+    }
+
+    public String getValorUnitHoraExtra() {
+        return valorUnitHoraExtra;
+    }
+
+    public void setValorUnitHoraExtra(String valorUnitHoraExtra) {
+        this.valorUnitHoraExtra = valorUnitHoraExtra;
     }
 
     public String getOutrosDescontos() {

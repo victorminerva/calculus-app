@@ -8,10 +8,6 @@ import com.minervavi.app.workcalcapp.databinding.domain.DadosInput;
 
 public interface ICalcular {
 
-    interface ICalcularModel {
-
-    }
-
     interface ICalcularPresenter {
         /**
          * Responsável por calcular o INSS através do Salário Bruto.

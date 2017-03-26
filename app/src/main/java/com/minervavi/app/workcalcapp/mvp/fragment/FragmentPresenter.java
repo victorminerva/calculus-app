@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
+import com.vicmikhailau.maskededittext.MaskedEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,6 +149,23 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
         editor.putInt(getContext().getString(R.string.key_abono_pecuniario), radioabonar.getCheckedRadioButtonId());
         editor.putInt(getContext().getString(R.string.key_adiantar_decima), radioadiantar.getCheckedRadioButtonId());
         editor.commit();
+    }
+
+    @Override
+    public void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
+        editor          = preferences.edit();
+
+        editor.putString(getContext().getString(R.string.key_jornada_mensal), etJornadaMensal.getText().toString());
+        editor.putString(getContext().getString(R.string.key_adicional_hora_extra), etAdicionalHE.getText().toString());
+        editor.putString(getContext().getString(R.string.key_num_hora_extra), etNumHoraExtra.getText().toString());
+        editor.commit();
+    }
+
+    @Override
+    public void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra) {
+        etJornadaMensal.setText(preferences.getString(getContext().getString(R.string.key_jornada_mensal), ""));
+        etAdicionalHE.setText(preferences.getString(getContext().getString(R.string.key_adicional_hora_extra), ""));
+        etNumHoraExtra.setText(preferences.getString(getContext().getString(R.string.key_num_hora_extra), ""));
     }
 
     @Override

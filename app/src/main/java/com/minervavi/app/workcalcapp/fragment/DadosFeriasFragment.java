@@ -121,12 +121,6 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        fragmentPresenter.manterDadosFerias(preferences, etValorMedioHE, etDiasFerias, radioAbonar, radioAdiantar);
-    }
-
-    @Override
     public void calcular() {
         dadosInput.getDadosSalarioLiq().setSalarioBruto(dadosInput.getDadosSalarioLiq().getSalarioBruto() + dadosInput.getDadosFerias().getMediaHorasExtrasAno());
         this.valorAdiantamento= dadosInput.getDadosFerias().getAdiantarPrimeiraDecimo() ? (dadosInput.getDadosSalarioLiq().getSalarioBruto() / 100) / 2 : null;
@@ -149,5 +143,11 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
         this.percentualIrrf   = calcularPresenter.percentualIRRF(dadosInput, inss);
         this.salarioLiq       = calcularPresenter.calularSalarioFerias(dadosInput, inss, irrf, valorAbono, valorAdiantamento);
         dadosInput.getDadosSalarioLiq().setSalarioBruto(valorBase);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fragmentPresenter.manterDadosFerias(preferences, etValorMedioHE, etDiasFerias, radioAbonar, radioAdiantar);
     }
 }
