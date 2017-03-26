@@ -15,6 +15,7 @@ import com.minervavi.app.workcalcapp.fragment.DadosFeriasFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosHoraExtraFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosRetroativoFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosSalarioLiqFragment;
+import com.minervavi.app.workcalcapp.fragment.SettingsFragment;
 
 /**
  * Created by victo on 13/03/2017.
@@ -60,6 +61,9 @@ public class AppPresenter implements IApp.IAppPresenter {
             case R.id.fl_general_retroativo:
                 fragment = DadosRetroativoFragment.newInstance();
                 break;
+            case R.id.fl_general_settings:
+                fragment = SettingsFragment.newInstance();
+                break;
         }
         newInstanceFragmentClass();
     }
@@ -71,12 +75,13 @@ public class AppPresenter implements IApp.IAppPresenter {
     @Override
     public void frameLayoutUnpressed(FrameLayout flGeneralSalario, FrameLayout flGeneralFerias,
                                      FrameLayout flGeneralHoraExtra, FrameLayout flGeneralDecimo,
-                                     FrameLayout flGeneralRetroativo) {
+                                     FrameLayout flGeneralRetroativo, FrameLayout flGeneralSettings) {
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
         flGeneralFerias.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
         flGeneralHoraExtra.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
         flGeneralDecimo.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
         flGeneralRetroativo.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
+        flGeneralSettings.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey700));
     }
 
     @Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fl_general_salario"
+    android:id="@+id/fl_general_settings"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_column="0"
@@ -19,7 +19,7 @@
         android:layout_marginBottom="@dimen/size_avatar_toolbar"
         android:contentDescription="@string/category"
         android:padding="@dimen/spacing_normal"
-        app:srcCompat="@drawable/ic_money_white_36dp" />
+        app:srcCompat="@drawable/ic_working_tools" />
 
     <TextView
         android:id="@+id/category_title"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:padding="@dimen/spacing_double"
-        android:text="Dados Salário Liquído"
+        android:text="Configurações"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 

@@ -23,7 +23,7 @@ public interface IApp {
         void onCategoriaClick(View v);
         void frameLayoutUnpressed(FrameLayout flGeneralSalario, FrameLayout flGeneralFerias,
                                   FrameLayout flGeneralHoraExtra, FrameLayout flGeneralDecimo,
-                                  FrameLayout flGeneralRetroativo);
+                                  FrameLayout flGeneralRetroativo, FrameLayout flGeneralSettings);
         void setView(IAppView view);
         void setFragmentManager(FragmentManager fragmentManager);
         void showSlideUpCurrent(SlideUp slideUp, FloatingActionButton fab);

@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
             android:orientation="vertical"
-            android:weightSum="4">
+            android:weightSum="5">
 
             <include layout="@layout/item_categ_general_salario" />
 
@@ -28,6 +28,8 @@
             <include layout="@layout/item_categ_general_decimo" />
 
             <include layout="@layout/item_categ_general_retroativo" />
+
+            <include layout="@layout/item_categ_general_settings" />
 
         </LinearLayout>
 

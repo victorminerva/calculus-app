@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     private FrameLayout flGeneralHoraExtra;
     private FrameLayout flGeneralDecimo;
     private FrameLayout flGeneralRetroativo;
+    private FrameLayout flGeneralSettings;
 
     private RelativeLayout  slideView;
     private FrameLayout     dim;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         this.flGeneralHoraExtra     = (FrameLayout) findViewById(R.id.fl_general_hora_extra);
         this.flGeneralDecimo        = (FrameLayout) findViewById(R.id.fl_general_decimo);
         this.flGeneralRetroativo    = (FrameLayout) findViewById(R.id.fl_general_retroativo);
+        this.flGeneralSettings      = (FrameLayout) findViewById(R.id.fl_general_settings);
         this.slideView              = (RelativeLayout) findViewById(R.id.slideView);
         this.dim                    = (FrameLayout) findViewById(R.id.dim);
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralHoraExtra.setOnClickListener(this);
         flGeneralDecimo.setOnClickListener(this);
         flGeneralRetroativo.setOnClickListener(this);
+        flGeneralSettings.setOnClickListener(this);
 
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(this, R.color.grey800));
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     @Override
     public void onClick(View v) {
         appPresenter.frameLayoutUnpressed(flGeneralSalario, flGeneralFerias, flGeneralHoraExtra,
-                flGeneralDecimo, flGeneralRetroativo);
+                flGeneralDecimo, flGeneralRetroativo, flGeneralSettings);
         appPresenter.onCategoriaClick(v);
     }
 
