@@ -6,6 +6,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="txt_este_anuncio">Este anúncio ajuda a manter a edição gratuita</string>
+    <string name="bt_nao_obg">Não, obrigado</string>
+    <string name="ad_unit_id">ca-app-pub-3575287456847740/2465250519</string>
+
     <!-- TextView String -->
     <string name="tv_salario">Salário Bruto </string>
     <string name="tv_num_dependentes">Número de Dependentes</string>
@@ -53,5 +57,6 @@
     <string name="key_salario_base_reaj">key_salario_base_reaj</string>
     <string name="key_percentual_aumento">key_percentual_aumento</string>
     <string name="key_num_meses_trabalhados_reaj">key_num_meses_trabalhados_reaj</string>
+    <string name="title_activity_publicity">PublicityActivity</string>
 
 </resources>

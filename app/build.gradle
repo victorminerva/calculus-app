@@ -38,5 +38,6 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:25.3.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.Pierry:SimpleToast:v1.7'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
     testCompile 'junit:junit:4.12'
 }

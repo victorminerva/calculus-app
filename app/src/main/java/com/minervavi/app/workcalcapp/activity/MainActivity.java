@@ -1,12 +1,15 @@
 package com.minervavi.app.workcalcapp.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.mancj.slideup.SlideUp;
@@ -98,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     public void showSlideUpCurrent(final FloatingActionButton fab) {
         appPresenter.showSlideUpCurrent(slideUp, fab);
     }
+
+
 
     @Override
     public void onClick(View v) {
