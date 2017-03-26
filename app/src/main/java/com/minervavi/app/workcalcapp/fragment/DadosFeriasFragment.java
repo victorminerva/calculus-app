@@ -128,7 +128,7 @@ public class DadosFeriasFragment extends Fragment implements IFragment.IFragment
 
     @Override
     public void calcular() {
-
+        dadosInput.getDadosSalarioLiq().setSalarioBruto(dadosInput.getDadosSalarioLiq().getSalarioBruto() + dadosInput.getDadosFerias().getMediaHorasExtrasAno());
         this.valorAdiantamento= dadosInput.getDadosFerias().getAdiantarPrimeiraDecimo() ? (dadosInput.getDadosSalarioLiq().getSalarioBruto() / 100) / 2 : null;
         this.valorAbono = null;
         if(dadosInput.getDadosFerias().getAbonoPecuniario()) {
