@@ -69,7 +69,10 @@ public class AppPresenter implements IApp.IAppPresenter {
     }
 
     private void newInstanceFragmentClass() {
-        fragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.right_in, R.anim.right_out)
+                .replace(R.id.fl_container, fragment)
+                .commit();
     }
 
     @Override

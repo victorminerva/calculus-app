@@ -87,8 +87,11 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralSettings.setOnClickListener(this);
 
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(this, R.color.grey800));
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_container,
-                DadosSalarioLiqFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.right_in, R.anim.right_out)
+                .replace(R.id.fl_container, DadosSalarioLiqFragment.newInstance())
+                .commit();
+
     }
 
     @Override
