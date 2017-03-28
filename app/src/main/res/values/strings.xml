@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Calculus</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_publicity">PublicityActivity</string>
     <string name="category">categoria</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -57,6 +58,5 @@
     <string name="key_salario_base_reaj">key_salario_base_reaj</string>
     <string name="key_percentual_aumento">key_percentual_aumento</string>
     <string name="key_num_meses_trabalhados_reaj">key_num_meses_trabalhados_reaj</string>
-    <string name="title_activity_publicity">PublicityActivity</string>
 
 </resources>
