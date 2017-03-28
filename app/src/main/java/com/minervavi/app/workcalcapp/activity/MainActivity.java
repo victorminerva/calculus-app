@@ -1,15 +1,13 @@
 package com.minervavi.app.workcalcapp.activity;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.mancj.slideup.SlideUp;
@@ -95,6 +93,13 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                 .replace(R.id.fl_container, DadosSalarioLiqFragment.newInstance())
                 .commit();
 
+        flGeneralSalario.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralSalario.getRootView().getId() > -1) ? R.anim.up_from_bottom : R.anim.down_from_top));
+        flGeneralFerias.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralFerias.getRootView().getId() > -1) ? R.anim.up_from_bottom : R.anim.down_from_top));
+        flGeneralHoraExtra.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralHoraExtra.getRootView().getId() > -1) ? R.anim.up_from_bottom : R.anim.down_from_top));
+        flGeneralDecimo.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralDecimo.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
+        flGeneralRetroativo.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralRetroativo.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
+        flGeneralSettings.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralSettings.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
+
     }
 
     @Override
@@ -125,4 +130,5 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         super.onDestroy();
         appPresenter.removeDadosSalvos();
     }
+
 }
