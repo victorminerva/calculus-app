@@ -221,4 +221,20 @@ public class FragmentPresenter implements IFragment.IFragmentPresenter {
         }
     }
 
+    @Override
+    public void manterDadosRetroativo(SharedPreferences preferences, CurrencyEditText etSalarioAnterior, EditText etPercentual, EditText etQtdMeses) {
+        editor = preferences.edit();
+        editor.putString(getContext().getString(R.string.key_salario_base_reaj), etSalarioAnterior.getText().toString());
+        editor.putString(getContext().getString(R.string.key_percentual_aumento), etPercentual.getText().toString());
+        editor.putString(getContext().getString(R.string.key_num_meses_trabalhados_reaj), etQtdMeses.getText().toString());
+        editor.commit();
+    }
+
+    @Override
+    public void recuperaDadosRetroativo(SharedPreferences preferences, CurrencyEditText etSalarioAnterior, EditText etPercentual, EditText etQtdMeses) {
+        etSalarioAnterior.setText(preferences.getString(getContext().getString(R.string.key_salario_base_reaj), ""));
+        etPercentual.setText(preferences.getString(getContext().getString(R.string.key_percentual_aumento), ""));
+        etQtdMeses.setText(preferences.getString(getContext().getString(R.string.key_num_meses_trabalhados_reaj), ""));
+    }
+
 }

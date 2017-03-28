@@ -50,17 +50,27 @@ public interface IFragment {
 
         List<String> retrieveListOfDesconts();
 
-        void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
+        void manterDadosFerias(SharedPreferences preferences, CurrencyEditText etvalormediohe,
+                               EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
 
-        void recuperaDadosFerias(View view, SharedPreferences preferences, CurrencyEditText etvalormediohe, EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
+        void recuperaDadosFerias(View view, SharedPreferences preferences, CurrencyEditText etvalormediohe,
+                                 EditText etdiasferias, RadioGroup radioabonar, RadioGroup radioadiantar);
 
-        void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
+        void manterDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal,
+                                  MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
 
-        void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal, MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
+        void recuperaDadosHoraExtra(SharedPreferences preferences, MaskedEditText etJornadaMensal,
+                                    MaskedEditText etAdicionalHE, MaskedEditText etNumHoraExtra);
 
         void manterDadosDecimo(SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela);
 
         void recuperaDadosDecimo(View view, SharedPreferences preferences, EditText etNumMeses, RadioGroup radioParcela);
+
+        void manterDadosRetroativo(SharedPreferences preferences, CurrencyEditText etSalarioAnterior,
+                                   EditText etPercentual, EditText etQtdMeses);
+
+        void recuperaDadosRetroativo(SharedPreferences preferences, CurrencyEditText etSalarioAnterior,
+                                     EditText etPercentual, EditText etQtdMeses);
     }
 
     interface IFragmentView {

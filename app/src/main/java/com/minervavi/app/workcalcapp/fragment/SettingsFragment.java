@@ -6,17 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.adapter.ItemSettingsAdapter;
+
+import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
 
+    ArrayList<String> dataModels;
     protected ListView lvSettings;
-    protected ArrayAdapter<String> settingsAdapter;
-
-    protected String[] itemsAdapter;
+    private static ItemSettingsAdapter adapter;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -32,6 +35,10 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dataModels = new ArrayList<>();
+        dataModels.add("Sobre");
+        dataModels.add("Politica de Privacidade");
+
     }
 
     @Override
@@ -41,10 +48,16 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         lvSettings = (ListView) view.findViewById(R.id.lv_settings);
 
-        itemsAdapter = new String[]{"Sobre", "Politica de Privacidade"};
-        settingsAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, itemsAdapter);
+        adapter = new ItemSettingsAdapter(dataModels, getContext().getApplicationContext());
 
-        lvSettings.setAdapter(settingsAdapter);
+        lvSettings.setAdapter(adapter);
+
+        lvSettings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), "Teste", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
