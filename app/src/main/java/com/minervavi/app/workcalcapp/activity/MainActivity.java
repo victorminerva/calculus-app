@@ -11,8 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.mancj.slideup.SlideUp;
+import com.minervavi.app.workcalcapp.BuildConfig;
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.fragment.DadosSalarioLiqFragment;
+import com.minervavi.app.workcalcapp.fragment.VersionProDialog;
 import com.minervavi.app.workcalcapp.mvp.app.AppPresenter;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
 import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
@@ -84,8 +86,21 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralFerias.setOnClickListener(this);
         flGeneralHoraExtra.setOnClickListener(this);
         flGeneralDecimo.setOnClickListener(this);
-        flGeneralRetroativo.setOnClickListener(this);
         flGeneralSettings.setOnClickListener(this);
+
+        flGeneralRetroativo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (BuildConfig.FLAVOR.equals("free")) {
+                    VersionProDialog dialog = new VersionProDialog();
+                    dialog.show(getSupportFragmentManager(), "VerionProDialog");
+                } else {
+                    appPresenter.frameLayoutUnpressed(flGeneralSalario, flGeneralFerias, flGeneralHoraExtra,
+                            flGeneralDecimo, flGeneralRetroativo, flGeneralSettings);
+                    appPresenter.onCategoriaClick(v);
+                }
+            }
+        });
 
         flGeneralSalario.setBackgroundColor(ContextCompat.getColor(this, R.color.grey800));
         getSupportFragmentManager().beginTransaction()

@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="@dimen/spacing_normal">
+
+    <ImageView
+        android:id="@+id/image_purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/spacing_normal"
+        app:srcCompat="@drawable/image_purchase" />
+
+    <TextView
+        android:id="@+id/tv_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/spacing_nano"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_toRightOf="@id/image_purchase"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="@dimen/spacing_normal"
+        android:text="Este modo de cálculo está disponível apenas na versão PRO."
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv_texto"
+        android:layout_marginTop="@dimen/spacing_double"
+        android:text="Adiquirir agora" />
+
+</RelativeLayout>

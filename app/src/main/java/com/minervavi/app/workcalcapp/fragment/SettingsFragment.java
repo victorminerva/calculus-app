@@ -39,8 +39,10 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataModels = new ArrayList<>();
-        dataModels.add("Sobre");
+        dataModels.add("Sobre o App");
         dataModels.add("Politica de Privacidade");
+        dataModels.add("Remover Anúncios");
+        dataModels.add("Obter Versão PRO");
 
     }
 
@@ -64,6 +66,8 @@ public class SettingsFragment extends Fragment {
                         break;
                     case 1:
                         showPrivacyPolicyDialog();
+                        break;
+                    case 2:
                         break;
                 }
 
