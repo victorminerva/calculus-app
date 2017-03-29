@@ -1,6 +1,7 @@
 package com.minervavi.app.workcalcapp.mvp.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.mancj.slideup.SlideUp;
+import com.minervavi.app.workcalcapp.BuildConfig;
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.activity.PublicityActivity;
 import com.minervavi.app.workcalcapp.fragment.DadosDecimoFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosFeriasFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosHoraExtraFragment;
@@ -73,10 +76,10 @@ public class AppPresenter implements IApp.IAppPresenter {
                 .setCustomAnimations(R.anim.right_in, R.anim.right_out)
                 .replace(R.id.fl_container, fragment)
                 .commit();
-        /*if (BuildConfig.FLAVOR == "free") {
+        if (BuildConfig.FLAVOR == "free") {
             Intent iPub = new Intent(getContext(), PublicityActivity.class);
             getContext().startActivity(iPub);
-        }*/
+        }
     }
 
     @Override
