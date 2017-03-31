@@ -53,4 +53,14 @@
         android:textColor="@android:color/white"
         android:textSize="18dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/spacing_micro"
+        android:gravity="bottom"
+        android:text="@string/info_app"
+        android:textAlignment="center"
+        android:textStyle="italic" />
+
 </LinearLayout>

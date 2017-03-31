@@ -40,9 +40,10 @@ public class SettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         dataModels = new ArrayList<>();
         dataModels.add("Sobre o App");
+        dataModels.add("Termos de uso");
         dataModels.add("Politica de Privacidade");
         dataModels.add("Remover Anúncios");
-        dataModels.add("Obter Versão PRO");
+        dataModels.add("Adquirir Versão PRO");
 
     }
 
@@ -65,9 +66,12 @@ public class SettingsFragment extends Fragment {
                         showSobreDialog();
                         break;
                     case 1:
-                        showPrivacyPolicyDialog();
+                        showTermosDeUsoDialog();
                         break;
                     case 2:
+                        showPrivacyPolicyDialog();
+                        break;
+                    case 3:
                         break;
                 }
 
@@ -104,6 +108,23 @@ public class SettingsFragment extends Fragment {
         tvPrivacyPolicy.setText(Html.fromHtml(getString(R.string.privacy_policy_html)));
 
         LinearLayout layout = (LinearLayout) dialog.findViewById(R.id.ll_dialog);
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void showTermosDeUsoDialog() {
+        final Dialog dialog = new Dialog(getContext(), android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.termos_uso_dialog);
+
+        TextView tvPrivacyPolicy = (TextView) dialog.findViewById(R.id.tv_termos_uso);
+        tvPrivacyPolicy.setText(Html.fromHtml(getString(R.string.termos_de_uso)));
+
+        LinearLayout layout = (LinearLayout) dialog.findViewById(R.id.ll_termos_dialog);
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {

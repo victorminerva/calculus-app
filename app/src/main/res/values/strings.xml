@@ -100,4 +100,15 @@
               <p> Esta página Política de Privacidade foi criada em <a href="https://privacypolicytemplate.net" target="_blank">privacypolicytemplate.net</a> e modificado / gerado pelo <a href="https://app-privacy-policy-generator.firebaseapp.com/" target="_blank">App Privacy Policy Generator</a></p>
         ]]>
     </string>
+    <string name="termos_de_uso" formatted="false">
+        <![CDATA[
+        <h2>Termos de uso</h2>
+            <p> O Calculus é uma plataforma de informações e serviços que visa fornecer ferramentas de consultas a respeitos de cálculos diversos. </p>
+            <p> O Calculus não se responsabiliza por eventuais erros contidos nos cálculos seja devido a alguma alteração na legislação para o cálculo específico ou por erro matemático do mesmo. </p>
+            <p> Os resultados fornecidos pelo Calculus não possuem cunho legal. Caso necessite de resultados com este fim, sugerimos consulta a um profissional especializado. </p>
+            <p> O Calculus se reserva a modificar, a qualquer momento, o conteúdo e os termos deste TERMO DE USO ficando seus usuários automaticamente cientes e concordantes com os novos termos. </p>
+            <p> O Calculus está sempre disposto a escutar, discutir e, eventualmente, modificar este TERMO DE USO de modo a atender aos interesses comuns do Calculus e seus USUÁRIOS. </p>
+        ]]>
+    </string>
+    <string name="info_app">**Os cálculos contidos no app são baseados em dados referenciados, porém ainda sim podem estar incorretos e por isso devem ser utilizados apenas como referência. Caso necessite de um resultado exato e com cunho legal, sugerimos que procure um profissional especializado. Leia os termos de uso.</string>
 </resources>
