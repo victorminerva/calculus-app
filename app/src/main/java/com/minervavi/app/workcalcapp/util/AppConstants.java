@@ -6,11 +6,13 @@ package com.minervavi.app.workcalcapp.util;
 
 public interface AppConstants {
 
-    String APP_SALARIO              = "APP_SALARIO";
-    String base64EncodedPublicKey   = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgsvdMHh1FSSMGzh6Mt8yFxMONamxa6IYR3J32zKAZXw9aQBaNh1J5s6+a/O9188waswqyqvjnXss780o579rqpCCZ0CwVta5qJWZ1lJoOMD3fxj5jM8Z3izerjF2UgI/Mv/gjqqEQvq1Pn4EcYa0BNNEkym/E7lEkw80hz95nZYWZKj5gnfb0VckQFL3N3FmKI0GExJvpAa1c7RoHtz7C4G7x24t+VcUDEutKGpY1M6ze3u+Wk52wTaUbf+tdKh8oGf4xsVRx/u2Sixl0jHAiInx5NbOyVL0c3/DFM18J+quCP4KDppIHoYP0jaLSxHe4Rp0YA3VRpPTpdJ9sR7xQIDAQAB";
-    String SEM_ANUNCIO              = "app_sem_anuncio";
-    String VERSAO_PRO               =  "versao_pro";
-    String[] ASSINATURAS_ID         = new String[]{};
+    String APP_SALARIO                      = "APP_SALARIO";
+
+    String      SEM_ANUNCIO                 = "app_sem_anuncio";
+    String      VERSAO_PRO                  =  "versao_pro";
+
+    String      PUBLICKEY                   = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgsvdMHh1FSSMGzh6Mt8yFxMONamxa6IYR3J32zKAZXw9aQBaNh1J5s6+a/O9188waswqyqvjnXss780o579rqpCCZ0CwVta5qJWZ1lJoOMD3fxj5jM8Z3izerjF2UgI/Mv/gjqqEQvq1Pn4EcYa0BNNEkym/E7lEkw80hz95nZYWZKj5gnfb0VckQFL3N3FmKI0GExJvpAa1c7RoHtz7C4G7x24t+VcUDEutKGpY1M6ze3u+Wk52wTaUbf+tdKh8oGf4xsVRx/u2Sixl0jHAiInx5NbOyVL0c3/DFM18J+quCP4KDppIHoYP0jaLSxHe4Rp0YA3VRpPTpdJ9sR7xQIDAQAB";
+    int         RC_REQUEST                  = 10001;
     /**
      * Valores do INSS conforme tabela INSS 2017.
      *

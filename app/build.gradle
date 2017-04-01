@@ -21,18 +21,6 @@ android {
         enabled = true
     }
 
-    productFlavors {
-        free {
-            applicationId "com.minervavi.app.workcalcapp.free"
-            versionCode 1
-            versionName '1.0.0'
-        }
-        paid {
-            applicationId "com.minervavi.app.workcalcapp.paid"
-            versionCode 1
-            versionName '1.0.0'
-        }
-    }
 }
 
 dependencies {

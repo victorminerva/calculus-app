@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
      */
     protected SlideUp slideUp;
 
+    private String base64EncodedPublicKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
 
     @Override
     public void init() {
+        base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgsvdMHh1FSSMGzh6Mt8yFxMONamxa6IYR3J32zKAZXw9aQBaNh1J5s6+a/O9188waswqyqvjnXss780o579rqpCCZ0CwVta5qJWZ1lJoOMD3fxj5jM8Z3izerjF2UgI/Mv/gjqqEQvq1Pn4EcYa0BNNEkym/E7lEkw80hz95nZYWZKj5gnfb0VckQFL3N3FmKI0GExJvpAa1c7RoHtz7C4G7x24t+VcUDEutKGpY1M6ze3u+Wk52wTaUbf+tdKh8oGf4xsVRx/u2Sixl0jHAiInx5NbOyVL0c3/DFM18J+quCP4KDppIHoYP0jaLSxHe4Rp0YA3VRpPTpdJ9sR7xQIDAQAB";
+
         this.flGeneralSalario       = (FrameLayout) findViewById(R.id.fl_general_salario);
         this.flGeneralFerias        = (FrameLayout) findViewById(R.id.fl_general_ferias);
         this.flGeneralHoraExtra     = (FrameLayout) findViewById(R.id.fl_general_hora_extra);

@@ -23,6 +23,9 @@ public class VersionProDialog extends DialogFragment {
     private TextView        tvTexto;
     private Button          btnBuy;
 
+    public VersionProDialog() {
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
