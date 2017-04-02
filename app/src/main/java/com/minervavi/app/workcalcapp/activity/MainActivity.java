@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
 
             ((CalculusApplication) getApplication()).setmHelper(mHelper);
         }
-
+        appPresenter.setmIsLite(mIsLite);
 
         this.flGeneralSalario       = (FrameLayout) findViewById(R.id.fl_general_salario);
         this.flGeneralFerias        = (FrameLayout) findViewById(R.id.fl_general_ferias);
@@ -277,23 +277,5 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
             }
         }
     };
-
-    /*private IabHelper.OnIabPurchaseFinishedListener mIabPurchaseFinishedListener
-                                                = new IabHelper.OnIabPurchaseFinishedListener() {
-        @Override
-        public void onIabPurchaseFinished(IabResult result, Purchase info) {
-            Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: ");
-
-            if (result.isFailure()) {
-                Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: FAIL : " + result);
-                return;
-            } else if (info.getSku().equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[0])){
-                mIsPro = Boolean.TRUE;
-                Log.i(AppConstants.APP_SALARIO, info.getSku().toUpperCase());
-                Log.i(AppConstants.APP_SALARIO, "ORDER ID: " + info.getOrderId());
-                Log.i(AppConstants.APP_SALARIO, "DeveloperPayload: " + info.getDeveloperPayload());
-            }
-        }
-    };*/
 
 }

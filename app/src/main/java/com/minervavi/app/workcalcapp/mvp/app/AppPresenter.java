@@ -1,6 +1,7 @@
 package com.minervavi.app.workcalcapp.mvp.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.mancj.slideup.SlideUp;
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.activity.PublicityActivity;
 import com.minervavi.app.workcalcapp.fragment.DadosDecimoFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosFeriasFragment;
 import com.minervavi.app.workcalcapp.fragment.DadosHoraExtraFragment;
@@ -28,6 +30,8 @@ public class AppPresenter implements IApp.IAppPresenter {
 
     private FragmentManager fragmentManager;
     private Fragment        fragment;
+
+    private Boolean         mIsLite;
 
     public AppPresenter() {
         appModel = new AppModel(this);
@@ -69,10 +73,10 @@ public class AppPresenter implements IApp.IAppPresenter {
     }
 
     private void newInstanceFragmentClass() {
-        /*if (BuildConfig.FLAVOR == "free") {
+        if (!mIsLite) {
             Intent iPub = new Intent(getContext(), PublicityActivity.class);
             getContext().startActivity(iPub);
-        }*/
+        }
         fragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.right_in, R.anim.right_out)
                 .replace(R.id.fl_container, fragment)
@@ -114,6 +118,11 @@ public class AppPresenter implements IApp.IAppPresenter {
                 fab.show();
             }
         });
+    }
+
+    @Override
+    public void setmIsLite(Boolean mIsLite) {
+        this.mIsLite = mIsLite;
     }
 
     @Override

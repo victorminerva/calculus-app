@@ -27,7 +27,7 @@ public interface IApp {
         void setView(IAppView view);
         void setFragmentManager(FragmentManager fragmentManager);
         void showSlideUpCurrent(SlideUp slideUp, FloatingActionButton fab);
-
+        void setmIsLite(Boolean mIsLite);
         void removeDadosSalvos();
     }
 

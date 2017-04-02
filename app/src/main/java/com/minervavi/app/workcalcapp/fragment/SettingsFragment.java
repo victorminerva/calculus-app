@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,27 @@ import android.widget.TextView;
 
 import com.minervavi.app.workcalcapp.R;
 import com.minervavi.app.workcalcapp.adapter.ItemSettingsAdapter;
+import com.minervavi.app.workcalcapp.application.CalculusApplication;
+import com.minervavi.app.workcalcapp.util.AppConstants;
+import com.minervavi.app.workcalcapp.util.IabHelper;
+import com.minervavi.app.workcalcapp.util.IabResult;
+import com.minervavi.app.workcalcapp.util.Purchase;
 
 import java.util.ArrayList;
+
+import static com.minervavi.app.workcalcapp.activity.MainActivity.randInt;
 
 public class SettingsFragment extends Fragment {
 
     ArrayList<String> dataModels;
     protected ListView lvSettings;
     private static ItemSettingsAdapter adapter;
+
+
+    private IabHelper       mHelper;
+
+    private Boolean         mIsPro;
+    private Boolean         mIsLite;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -45,6 +59,7 @@ public class SettingsFragment extends Fragment {
         dataModels.add("Remover Anúncios");
         dataModels.add("Adquirir Versão PRO");
 
+        mHelper = ((CalculusApplication) getActivity().getApplication()).getmHelper();
     }
 
     @Override
@@ -72,6 +87,10 @@ public class SettingsFragment extends Fragment {
                         showPrivacyPolicyDialog();
                         break;
                     case 3:
+                        purchaseSubscription(AppConstants.SUBSCRIPTIONS_IDS[1]);
+                        break;
+                    case 4:
+                        purchaseSubscription(AppConstants.SUBSCRIPTIONS_IDS[0]);
                         break;
                 }
 
@@ -133,4 +152,42 @@ public class SettingsFragment extends Fragment {
         });
         dialog.show();
     }
+
+    public void purchaseSubscription(String subscription){
+        if (mHelper == null) {
+            Log.d(AppConstants.APP_SALARIO, "onClick: HELPER IS NULL");
+            return;
+        }
+
+        try {
+            if (mHelper.subscriptionsSupported()) {
+                mHelper.launchSubscriptionPurchaseFlow(getActivity(),subscription, AppConstants.RC_REQUEST, mIabPurchaseFinishedListener, AppConstants.TOKEN + randInt(1000, 9999));
+            }
+        } catch (IabHelper.IabAsyncInProgressException e) {
+            Log.e(AppConstants.APP_SALARIO, "buy: " + e.getMessage(), e);
+        }
+    }
+
+    private IabHelper.OnIabPurchaseFinishedListener mIabPurchaseFinishedListener
+            = new IabHelper.OnIabPurchaseFinishedListener() {
+        @Override
+        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+            Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: ");
+
+            if (result.isFailure()) {
+                Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: FAIL : " + result);
+                return;
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[0])){
+                mIsPro = Boolean.TRUE;
+                Log.i(AppConstants.APP_SALARIO, info.getSku().toUpperCase());
+                Log.i(AppConstants.APP_SALARIO, "ORDER ID: " + info.getOrderId());
+                Log.i(AppConstants.APP_SALARIO, "DeveloperPayload: " + info.getDeveloperPayload());
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[1])){
+                mIsLite = Boolean.TRUE;
+                Log.i(AppConstants.APP_SALARIO, info.getSku().toUpperCase());
+                Log.i(AppConstants.APP_SALARIO, "ORDER ID: " + info.getOrderId());
+                Log.i(AppConstants.APP_SALARIO, "DeveloperPayload: " + info.getDeveloperPayload());
+            }
+        }
+    };
 }
