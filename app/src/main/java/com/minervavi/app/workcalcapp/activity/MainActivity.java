@@ -1,9 +1,11 @@
 package com.minervavi.app.workcalcapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -12,10 +14,21 @@ import android.widget.RelativeLayout;
 
 import com.mancj.slideup.SlideUp;
 import com.minervavi.app.workcalcapp.R;
+import com.minervavi.app.workcalcapp.application.CalculusApplication;
 import com.minervavi.app.workcalcapp.fragment.DadosSalarioLiqFragment;
+import com.minervavi.app.workcalcapp.fragment.VersionProDialog;
 import com.minervavi.app.workcalcapp.mvp.app.AppPresenter;
 import com.minervavi.app.workcalcapp.mvp.app.IApp;
 import com.minervavi.app.workcalcapp.mvp.fragment.FragmentPresenter;
+import com.minervavi.app.workcalcapp.util.AppConstants;
+import com.minervavi.app.workcalcapp.util.IabHelper;
+import com.minervavi.app.workcalcapp.util.IabResult;
+import com.minervavi.app.workcalcapp.util.Inventory;
+import com.minervavi.app.workcalcapp.util.Purchase;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements IApp.IAppView, FrameLayout.OnClickListener {
 
@@ -39,7 +52,16 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
      */
     protected SlideUp slideUp;
 
-    private String base64EncodedPublicKey;
+    /**
+     * Booleans
+     */
+    private Boolean mIsLite;
+    private Boolean mIsPro;
+    /**
+     * Variaveis Faturamento
+     */
+    private String      base64EncodedPublicKey;
+    private IabHelper   mHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +94,42 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
 
     @Override
     public void init() {
-        base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgsvdMHh1FSSMGzh6Mt8yFxMONamxa6IYR3J32zKAZXw9aQBaNh1J5s6+a/O9188waswqyqvjnXss780o579rqpCCZ0CwVta5qJWZ1lJoOMD3fxj5jM8Z3izerjF2UgI/Mv/gjqqEQvq1Pn4EcYa0BNNEkym/E7lEkw80hz95nZYWZKj5gnfb0VckQFL3N3FmKI0GExJvpAa1c7RoHtz7C4G7x24t+VcUDEutKGpY1M6ze3u+Wk52wTaUbf+tdKh8oGf4xsVRx/u2Sixl0jHAiInx5NbOyVL0c3/DFM18J+quCP4KDppIHoYP0jaLSxHe4Rp0YA3VRpPTpdJ9sR7xQIDAQAB";
+        base64EncodedPublicKey = AppConstants.BASE64_KEY;
+        mHelper = ((CalculusApplication) getApplication()).getmHelper();
+
+        mIsPro  = Boolean.FALSE;
+        mIsLite = Boolean.FALSE;
+
+        if (mHelper == null){
+            mHelper = new IabHelper(MainActivity.this, base64EncodedPublicKey);
+            mHelper.enableDebugLogging(false);
+
+            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                @Override
+                public void onIabSetupFinished(IabResult result) {
+                    Log.i(AppConstants.APP_SALARIO, "onIabSetupFinished: ");
+
+                    if (result.isFailure()) {
+                        Log.i(AppConstants.APP_SALARIO, "onIabSetupFinished: FAIL :" + result);
+                    } else {
+                        Log.i(AppConstants.APP_SALARIO, "onIabSetupFinished: SUCCESS");
+                        List<String> productsIds = new ArrayList<String>();
+                        for (int i = 0; i < AppConstants.SUBSCRIPTIONS_IDS.length ; i++){
+                            productsIds.add(AppConstants.SUBSCRIPTIONS_IDS[i]);
+                        }
+
+                        try {
+                            mHelper.queryInventoryAsync(true, productsIds, mQueryInventoryFinishedListener);
+                        } catch (IabHelper.IabAsyncInProgressException e) {
+                            Log.e(AppConstants.APP_SALARIO, "onIabSetupFinished: " + e.getMessage(), e);
+                        }
+                    }
+                }
+            });
+
+            ((CalculusApplication) getApplication()).setmHelper(mHelper);
+        }
+
 
         this.flGeneralSalario       = (FrameLayout) findViewById(R.id.fl_general_salario);
         this.flGeneralFerias        = (FrameLayout) findViewById(R.id.fl_general_ferias);
@@ -92,14 +149,14 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralRetroativo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*if (BuildConfig.FLAVOR.equals("free")) {
+                if (!mIsPro) {
                     VersionProDialog dialog = new VersionProDialog();
                     dialog.show(getSupportFragmentManager(), "VerionProDialog");
-                } else {*/
+                } else {
                     appPresenter.frameLayoutUnpressed(flGeneralSalario, flGeneralFerias, flGeneralHoraExtra,
                             flGeneralDecimo, flGeneralRetroativo, flGeneralSettings);
                     appPresenter.onCategoriaClick(v);
-                /*}*/
+                }
             }
         });
 
@@ -123,13 +180,20 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         appPresenter.showSlideUpCurrent(slideUp, fab);
     }
 
-
-
     @Override
     public void onClick(View v) {
         appPresenter.frameLayoutUnpressed(flGeneralSalario, flGeneralFerias, flGeneralHoraExtra,
                 flGeneralDecimo, flGeneralRetroativo, flGeneralSettings);
         appPresenter.onCategoriaClick(v);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AppConstants.RC_REQUEST && resultCode == RESULT_OK) {
+            if (mHelper != null && mHelper.handleActivityResult(requestCode, resultCode, data)){
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 
     @Override
@@ -145,6 +209,91 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
     protected void onDestroy() {
         super.onDestroy();
         appPresenter.removeDadosSalvos();
+
+        if (mHelper != null){
+            try {
+                mHelper.dispose();
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                Log.e(AppConstants.APP_SALARIO, "onDestroy: " + e.getMessage(), e);
+            }
+        }
+        mHelper = null;
+        ((CalculusApplication) getApplication()).setmHelper(null);
     }
+
+    private void checkIfProductIsPurchase(Boolean status, String productId){
+        if (status){
+            if (productId.equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[0])){
+                mIsPro = Boolean.TRUE;
+            }
+            if (productId.equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[1])){
+                mIsLite = Boolean.TRUE;
+            }
+        }
+    }
+
+    public static int randInt(int min, int max){
+        Random random = new Random();
+        int randomNum = random.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+    /**
+     * LISTENERS
+     */
+    private IabHelper.QueryInventoryFinishedListener mQueryInventoryFinishedListener
+            = new IabHelper.QueryInventoryFinishedListener() {
+        @Override
+        public void onQueryInventoryFinished(IabResult result, Inventory inv) {
+            Log.i(AppConstants.APP_SALARIO, "onQueryInventoryFinished: ");
+
+            if (result.isFailure()) {
+                Log.i(AppConstants.APP_SALARIO, "onQueryInventoryFinished: FAIL : " + result);
+            } else if (inv != null){
+                for (int i = 0; i < AppConstants.SUBSCRIPTIONS_IDS.length; i++) {
+
+                    Purchase calculusPro = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[0]);
+                    Purchase calculusNoADS = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[1]);
+
+                    if(calculusPro != null) {
+                        mIsPro = Boolean.TRUE;
+                    }
+                    if (calculusNoADS != null) {
+                        mIsLite = Boolean.TRUE;
+                    }
+
+                    if (inv.hasDetails(AppConstants.SUBSCRIPTIONS_IDS[i])) {
+                        Log.i("Script", inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getSku().toUpperCase());
+                        Log.i("Script", "Sku: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getSku().toUpperCase());
+                        Log.i("Script", "Title: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getTitle());
+                        Log.i("Script", "Type: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getType());
+                        Log.i("Script", "Price: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getPrice());
+                        Log.i("Script", "Description: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getDescription());
+                        Log.i("Script", "Status purchase: " + (inv.hasPurchase(AppConstants.SUBSCRIPTIONS_IDS[i]) ? "COMPRADO" : "NÃO COMPRADO"));
+                        checkIfProductIsPurchase(inv.hasPurchase(AppConstants.SUBSCRIPTIONS_IDS[i]), AppConstants.SUBSCRIPTIONS_IDS[i]);
+                        Log.i("Script", "----------------------------------------------------");
+                    }
+                }
+            }
+        }
+    };
+
+    /*private IabHelper.OnIabPurchaseFinishedListener mIabPurchaseFinishedListener
+                                                = new IabHelper.OnIabPurchaseFinishedListener() {
+        @Override
+        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+            Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: ");
+
+            if (result.isFailure()) {
+                Log.i(AppConstants.APP_SALARIO, "onIabPurchaseFinished: FAIL : " + result);
+                return;
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[0])){
+                mIsPro = Boolean.TRUE;
+                Log.i(AppConstants.APP_SALARIO, info.getSku().toUpperCase());
+                Log.i(AppConstants.APP_SALARIO, "ORDER ID: " + info.getOrderId());
+                Log.i(AppConstants.APP_SALARIO, "DeveloperPayload: " + info.getDeveloperPayload());
+            }
+        }
+    };*/
 
 }
