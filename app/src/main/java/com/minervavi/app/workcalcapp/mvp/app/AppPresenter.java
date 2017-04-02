@@ -32,6 +32,7 @@ public class AppPresenter implements IApp.IAppPresenter {
     private Fragment        fragment;
 
     private Boolean         mIsLite;
+    private Boolean         mIsPro;
 
     public AppPresenter() {
         appModel = new AppModel(this);
@@ -66,7 +67,7 @@ public class AppPresenter implements IApp.IAppPresenter {
                 fragment = DadosRetroativoFragment.newInstance();
                 break;
             case R.id.fl_general_settings:
-                fragment = SettingsFragment.newInstance();
+                fragment = SettingsFragment.newInstance(mIsPro, mIsLite);
                 break;
         }
         newInstanceFragmentClass();
@@ -118,6 +119,11 @@ public class AppPresenter implements IApp.IAppPresenter {
                 fab.show();
             }
         });
+    }
+
+    @Override
+    public void setmIsPro(Boolean mIsPro) {
+        this.mIsPro = mIsPro;
     }
 
     @Override

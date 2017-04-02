@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                 .withStartState(SlideUp.State.HIDDEN)
                 .build();
 
+        appPresenter.setmIsPro(mIsPro == null ? false : mIsPro);
+        appPresenter.setmIsLite(mIsLite == null ? false : mIsLite);
+
     }
 
     @Override
@@ -129,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
 
             ((CalculusApplication) getApplication()).setmHelper(mHelper);
         }
-        appPresenter.setmIsLite(mIsLite);
 
         this.flGeneralSalario       = (FrameLayout) findViewById(R.id.fl_general_salario);
         this.flGeneralFerias        = (FrameLayout) findViewById(R.id.fl_general_ferias);
@@ -172,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         flGeneralDecimo.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralDecimo.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
         flGeneralRetroativo.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralRetroativo.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
         flGeneralSettings.startAnimation(AnimationUtils.loadAnimation(this, (flGeneralSettings.getRootView().getId() > -1) ? R.anim.down_from_top : R.anim.up_from_bottom));
-
     }
 
     @Override
@@ -189,10 +190,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AppConstants.RC_REQUEST && resultCode == RESULT_OK) {
-            if (mHelper != null && mHelper.handleActivityResult(requestCode, resultCode, data)){
-                super.onActivityResult(requestCode, resultCode, data);
-            }
+        if (mHelper != null && mHelper.handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -211,11 +210,7 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         appPresenter.removeDadosSalvos();
 
         if (mHelper != null){
-            try {
-                mHelper.dispose();
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                Log.e(AppConstants.APP_SALARIO, "onDestroy: " + e.getMessage(), e);
-            }
+            mHelper.disposeWhenFinished();
         }
         mHelper = null;
         ((CalculusApplication) getApplication()).setmHelper(null);

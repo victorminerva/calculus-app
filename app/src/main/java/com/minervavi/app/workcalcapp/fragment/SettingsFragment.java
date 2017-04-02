@@ -2,6 +2,7 @@ package com.minervavi.app.workcalcapp.fragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -42,9 +43,11 @@ public class SettingsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static SettingsFragment newInstance() {
+    public static SettingsFragment newInstance(Boolean mIsPro, Boolean mIsLite) {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
+        args.putBoolean(AppConstants.CALCULUS_PRO, mIsPro);
+        args.putBoolean(AppConstants.CALCULUS_LITE, mIsLite);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,6 +61,9 @@ public class SettingsFragment extends Fragment {
         dataModels.add("Politica de Privacidade");
         dataModels.add("Remover Anúncios");
         dataModels.add("Adquirir Versão PRO");
+
+        this.mIsPro     = getArguments().getBoolean(AppConstants.CALCULUS_PRO);
+        this.mIsLite    = getArguments().getBoolean(AppConstants.CALCULUS_LITE);
 
         mHelper = ((CalculusApplication) getActivity().getApplication()).getmHelper();
     }
@@ -190,4 +196,14 @@ public class SettingsFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (mHelper != null && mHelper.handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+
+            mHelper.disposeWhenFinished();
+        }
+    }
+
 }
