@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         setContentView(R.layout.activity_main);
         appPresenter = new AppPresenter();
         appPresenter.setView(this);
+        appPresenter.setmIsPro(Boolean.FALSE);
+        appPresenter.setmIsLite(Boolean.FALSE);
         appPresenter.setFragmentManager(getSupportFragmentManager());
         fragmentPresenter = new FragmentPresenter();
         fragmentPresenter.setViewApp(this);
@@ -89,10 +91,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                 .withGesturesEnabled(true)
                 .withStartState(SlideUp.State.HIDDEN)
                 .build();
-
-        appPresenter.setmIsPro(mIsPro == null ? false : mIsPro);
-        appPresenter.setmIsLite(mIsLite == null ? false : mIsLite);
-
     }
 
     @Override
@@ -216,17 +214,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
         ((CalculusApplication) getApplication()).setmHelper(null);
     }
 
-    private void checkIfProductIsPurchase(Boolean status, String productId){
-        if (status){
-            if (productId.equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[0])){
-                mIsPro = Boolean.TRUE;
-            }
-            if (productId.equalsIgnoreCase(AppConstants.SUBSCRIPTIONS_IDS[1])){
-                mIsLite = Boolean.TRUE;
-            }
-        }
-    }
-
     public static int randInt(int min, int max){
         Random random = new Random();
         int randomNum = random.nextInt((max - min) + 1) + min;
@@ -245,18 +232,18 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
             if (result.isFailure()) {
                 Log.i(AppConstants.APP_SALARIO, "onQueryInventoryFinished: FAIL : " + result);
             } else if (inv != null){
+                Purchase calculusPro = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[0]);
+                Purchase calculusNoADS = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[1]);
+
+                if(calculusPro != null) {
+                    mIsPro = Boolean.TRUE;
+                    appPresenter.setmIsPro(Boolean.TRUE);
+                }
+                if (calculusNoADS != null) {
+                    mIsLite = Boolean.TRUE;
+                    appPresenter.setmIsLite(Boolean.TRUE);
+                }
                 for (int i = 0; i < AppConstants.SUBSCRIPTIONS_IDS.length; i++) {
-
-                    Purchase calculusPro = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[0]);
-                    Purchase calculusNoADS = inv.getPurchase(AppConstants.SUBSCRIPTIONS_IDS[1]);
-
-                    if(calculusPro != null) {
-                        mIsPro = Boolean.TRUE;
-                    }
-                    if (calculusNoADS != null) {
-                        mIsLite = Boolean.TRUE;
-                    }
-
                     if (inv.hasDetails(AppConstants.SUBSCRIPTIONS_IDS[i])) {
                         Log.i("Script", inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getSku().toUpperCase());
                         Log.i("Script", "Sku: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getSku().toUpperCase());
@@ -265,7 +252,6 @@ public class MainActivity extends AppCompatActivity implements IApp.IAppView, Fr
                         Log.i("Script", "Price: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getPrice());
                         Log.i("Script", "Description: " + inv.getSkuDetails(AppConstants.SUBSCRIPTIONS_IDS[i]).getDescription());
                         Log.i("Script", "Status purchase: " + (inv.hasPurchase(AppConstants.SUBSCRIPTIONS_IDS[i]) ? "COMPRADO" : "NÃO COMPRADO"));
-                        checkIfProductIsPurchase(inv.hasPurchase(AppConstants.SUBSCRIPTIONS_IDS[i]), AppConstants.SUBSCRIPTIONS_IDS[i]);
                         Log.i("Script", "----------------------------------------------------");
                     }
                 }
